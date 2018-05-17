@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Treatments
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+        <h1>Add New Treatment</h1>
+        <h2>Please, enter the following information:</h2>
+    </ion-item>
+
+    <ion-list>
+        <ion-item>
+            <ion-label stacked color="primary">Date</ion-label>         <!--Treatment_date-->
+            <ion-input placeholder="Enter date"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Disease</ion-label>      <!--Treatment_disease-->
+            <ion-input placeholder="Select disease type"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Product</ion-label>      <!--Treatment_product-->
+            <ion-input placeholder="Enter product name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Quantity</ion-label>     <!--Treatment_quantity-->
+            <ion-input placeholder="Enter quantity"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Unit</ion-label>         <!--Treatment_unit-->
+            <ion-select [(ngModel)]="treatment-unit" interface="action-sheet" placeholder="Select unit">
+                <ion-option value="g">Grams</ion-option>
+                <ion-option value="ml">Milliliters</ion-option>
+                <ion-option value="s">Stripes</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-row padding>
+            <ion-col width-33>
+                <ion-buttons start>
+                    <button ion-button outline>Cancel</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67>
+                <ion-buttons end>
+                    <button ion-button block>Save</button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+
+</ion-content>

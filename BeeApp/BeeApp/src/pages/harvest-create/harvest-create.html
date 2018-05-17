@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Harvest
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+        <h1>Add New Harvest</h1>
+        <h2>Please, enter the following information:</h2>
+    </ion-item>
+
+    <ion-list>
+        <ion-item>
+            <ion-label stacked color="primary">Harvest name</ion-label>     <!--Harvest_name-->
+            <ion-input placeholder="Enter harvest name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Date</ion-label>             <!--Harvest_date-->
+            <ion-input placeholder="Enter date"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Harvest product</ion-label>  <!--Harvest_product-->
+            <ion-select [(ngModel)]="harvest-product" interface="action-sheet" placeholder="Select harvest product">
+                <ion-option value="bee-bread">Bee bread</ion-option>
+                <ion-option value="bee-brood">Bee brood</ion-option>
+                <ion-option value="beewax">Beewax</ion-option>
+                <ion-option value="honey">Honey</ion-option>
+                <ion-option value="pollen">Pollen</ion-option>
+                <ion-option value="bee-bread">Propolis</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Quantity</ion-label>         <!--Harvest_quantity-->
+            <ion-input placeholder="Enter quantity"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Unit</ion-label>             <!--Harvest_unit-->
+            <ion-select [(ngModel)]="harvest-unit" interface="action-sheet" placeholder="Select unit">
+                <ion-option value="g">Grams</ion-option>
+                <ion-option value="g">Kilograms</ion-option>
+                <ion-option value="ml">Milliliters</ion-option>
+                <ion-option value="l">Liters</ion-option>
+                <ion-option value="f">Frames</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Notes</ion-label>            <!--Harvest_notes-->
+            <ion-input placeholder="Add notes"></ion-input>
+        </ion-item>
+
+        <ion-row padding>
+            <ion-col width-33>
+                <ion-buttons start>
+                    <button ion-button outline>Cancel</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67>
+                <ion-buttons end>
+                    <button ion-button block>Save</button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+
+</ion-content>

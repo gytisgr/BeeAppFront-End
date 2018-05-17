@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-navbar color="primary">
+
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='ios-menu-outline'></ion-icon>
+        </button>
+
+        <ion-title>Harvest</ion-title>
+
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="ios-search-outline"></ion-icon>
+            </button>
+            <button ion-button icon-only>
+                <ion-icon name="ios-more-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+    <ion-card (click)="openHarvestInnerPage()">
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="./assets/img/honey3.jpg">
+            </ion-avatar>
+            <h2>#1 Honey spring</h2>                            <!--Harvest_name-->
+            <p>Honey</p>                                        <!--Harvest_product-->
+        </ion-item>
+        <ion-card-content>
+            <p>Some notes about harvest.</p>                    <!--Harvest_notes-->
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="ios-color-fill"></ion-icon>
+                    <div>120 kg</div>                           <!--Harvest_quantity, Havest_unit-->
+                </button>
+            </ion-col>
+            <ion-col center text-center>
+                <ion-note>
+                    Harvest date: 2018-04-20                    <!--Harvest_date-->
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+    <ion-card (click)="openHarvestInnerPage()">
+        <ion-item>
+            <ion-avatar item-left>
+                <img src="./assets/img/honey3.jpg">
+            </ion-avatar>
+            <h2>#1 Honey summer</h2>
+            <p>Honey</p>
+        </ion-item>
+        <ion-card-content>
+            <p>Some notes about harvest.</p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="ios-color-fill"></ion-icon>
+                    <div>120 kg</div>
+                </button>
+            </ion-col>
+            <ion-col center text-center>
+                <ion-note>
+                    Harvest date: 2018-04-20
+                </ion-note>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+
+
+    <ion-fab right bottom>
+        <button ion-fab color="primary" (click)="openHarvestCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>
+    </ion-fab>
+
+</ion-content>

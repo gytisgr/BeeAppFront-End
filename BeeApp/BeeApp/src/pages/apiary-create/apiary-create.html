@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Apiaries</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <ion-item>
+        <h1>Add New Apiary</h1>
+        <h2>Please, enter the following information:</h2>
+    </ion-item>
+
+    <ion-list>
+        <ion-item>
+            <ion-label stacked color="primary">Apiary Name</ion-label>
+            <ion-input placeholder="Enter apiary name"></ion-input>         <!--Apiary_name-->
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Location</ion-label>
+            <ion-input placeholder="Enter town, village"></ion-input>       <!--Apiary_place-->
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Latitude</ion-label>
+            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_latitude-->
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Longtitude</ion-label>
+            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_longtitude-->    
+        </ion-item>
+
+        <ion-row padding>
+            <ion-col width-33>
+                <ion-buttons start>
+                    <button ion-button outline>Cancel</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67>
+                <ion-buttons end>
+                    <button ion-button block type="submit">Save</button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+
+</ion-content>

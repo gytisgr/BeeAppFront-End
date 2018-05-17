@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='ios-menu-outline'></ion-icon>
+        </button>
+        <ion-title>Feeding Inner</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="ios-more-outline"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+
+    <ion-list>
+        <ion-row style="height: 1rem"></ion-row>
+
+        <ion-item no-lines>
+            <h1>Feeding</h1>
+        </ion-item>
+
+        <ion-item no-lines>
+            <ion-avatar item-left>
+                <img src="./assets/img/sugar.jpg">
+            </ion-avatar>
+            <h2>#1 Feeding</h2>                                 <!--Feeding_name-->
+            <p>Syrup</p>                                        <!--Feeding_product-->
+        </ion-item>
+        <ion-row>
+            <ion-col>
+                <button ion-button icon-left clear small>
+                    <ion-icon name="md-restaurant"></ion-icon>
+                    <div>10kg per hive</div>                    <!--Feeding quantity, Feeding_unit-->
+                </button>
+            </ion-col>
+            <ion-col center text-center>
+                <ion-note>
+                    Feeding date: 2018-04-20                    <!--Feeding_date-->
+                </ion-note>
+            </ion-col>
+        </ion-row>
+
+        <ion-item>
+            <p>Feeding notes</p>
+            <h2>Some notes about feeding.</h2>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

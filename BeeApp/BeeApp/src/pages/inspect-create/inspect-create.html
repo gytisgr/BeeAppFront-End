@@ -1,0 +1,104 @@
+<ion-header>
+    <ion-navbar color="primary">
+        <ion-title>
+            Inspection 
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-item>
+        <h1>Add New Inspection</h1>
+        <h2>Please, enter the following information:</h2>
+    </ion-item>
+
+    <ion-list>
+        <ion-item>
+            <ion-label stacked color="primary">Inspection name</ion-label>              <!--Inspection_name-->
+            <ion-input placeholder="Enter inspection name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Date</ion-label>
+            <ion-input placeholder="Enter date"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Bee temper</ion-label>                   <!--Bee_temper-->
+            <ion-select [(ngModel)]="bee-temper" interface="action-sheet" placeholder="Select bee temper">
+                <ion-option value="a">Aggressive</ion-option>
+                <ion-option value="c">Calm</ion-option>
+                <ion-option value="n">Nervous</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Bee strength</ion-label>                 <!--Bee_strength-->
+            <ion-select [(ngModel)]="bee-strength" interface="action-sheet" placeholder="Select bee strength">
+                <ion-option value="ten">10%</ion-option>
+                <ion-option value="thirty">30%</ion-option>
+                <ion-option value="fifty">50%</ion-option>
+                <ion-option value="seventy">70%</ion-option>
+                <ion-option value="ninety">90%</ion-option>
+                <ion-option value="hundread">100%</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <h1>Frames:</h1>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Frames with bees</ion-label>             <!--Frames_bees-->
+            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Frames with honey in body</ion-label>    <!--Frames_honey-->
+            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Frames with honey in supers</ion-label>  <!--Frames_honey_supers-->
+            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <h1>Drones:</h1>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Drones</ion-label>                       <!--Drones-->
+            <ion-select [(ngModel)]="drones" interface="action-sheet" placeholder="Drones">
+                <ion-option value="no">No</ion-option>
+                <ion-option value="yes">Yes</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Drone cells</ion-label>                  <!--Drone_cells-->
+            <ion-select [(ngModel)]="drones" interface="action-sheet" placeholder="Drone cells">
+                <ion-option value="no-cells">No</ion-option>
+                <ion-option value="yes-cells">Yes</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <h1>Diseases:</h1>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Disease</ion-label>
+            <ion-select [(ngModel)]="inspection-disease" interface="action-sheet" placeholder="Select disease type">
+                <ion-option value="none">No disease</ion-option>
+                <ion-option value="acarine">Acarine</ion-option>
+                <ion-option value="foul-brood">Foul brood</ion-option>
+                <ion-option value="nosema">Nosema</ion-option>
+                <ion-option value="varoosis">Varoosis</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-row padding>
+            <ion-col width-33>
+                <ion-buttons start>
+                    <button ion-button outline>Cancel</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67>
+                <ion-buttons end>
+                    <button ion-button block>Save</button>
+                </ion-buttons>
+            </ion-col>
+        </ion-row>
+    </ion-list>
+
+</ion-content>
