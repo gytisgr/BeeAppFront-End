@@ -1,14 +1,155 @@
 webpackJsonp([0],{
 
-/***/ 210:
+/***/ 212:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__register_register__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__tabs_tabs__ = __webpack_require__(640);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+var LoginPage = (function () {
+    function LoginPage(navCtrl, navParams, loadingCtrl, toastCtrl, http) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.loadingCtrl = loadingCtrl;
+        this.toastCtrl = toastCtrl;
+        this.http = http;
+        if (navParams.get('email')) {
+            this.username = navParams.get('email');
+        }
+    }
+    LoginPage.prototype.openRegisterPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__register_register__["a" /* RegisterPage */]);
+    };
+    LoginPage.prototype.processlogin = function () {
+        var _this = this;
+        var loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait...",
+        });
+        loader.present();
+        var body = new URLSearchParams();
+        body.set('username', this.username);
+        body.set('password', this.password);
+        body.set('grant_type', 'password');
+        console.log(body.toString());
+        var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* Headers */]();
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        this.http.post('http://beeapi.azurewebsites.net/oauth/token', body.toString(), { headers: headers }).map(function (res) { return res.json(); }).subscribe(function (data) {
+            if (data) {
+                loader.dismiss();
+                _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_5__tabs_tabs__["a" /* TabsPage */], { access_token: data.access_token });
+            }
+        }, function (error) {
+            if (error.status == 400) {
+                loader.dismiss();
+                var errorMessage = JSON.parse(error._body);
+                var toast = _this.toastCtrl.create({
+                    message: errorMessage.error_description,
+                    cssClass: 'warning',
+                    duration: 7000,
+                    position: 'bottom',
+                    dismissOnPageChange: true
+                });
+                toast.present();
+            }
+        });
+    };
+    return LoginPage;
+}());
+LoginPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
+        selector: 'page-login',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\login\login.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <ion-title>Login</ion-title>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <p padding>\n\n        Please enter your credentials to continue.\n\n    </p>\n\n\n\n    <ion-list padding>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Email</ion-label>\n\n            <ion-input type="text" [(ngModel)]="username"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Password</ion-label>\n\n            <ion-input type="password" [(ngModel)]="password"></ion-input>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n    <div>\n\n        <button ion-button full (click)="processlogin()">Log In</button>\n\n        <button ion-button full (click)="openRegisterPage()">Register</button>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\login\login.html"*/
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _e || Object])
+], LoginPage);
+
+var _a, _b, _c, _d, _e;
+//# sourceMappingURL=login.js.map
+
+/***/ }),
+
+/***/ 213:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__apiaries_apiaries__ = __webpack_require__(479);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeding_feeding__ = __webpack_require__(215);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var HomePage = (function () {
+    function HomePage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        console.log(navParams.get('access_token'));
+    }
+    HomePage.prototype.onLink = function (url) {
+        window.open(url);
+    };
+    HomePage.prototype.openApiariesPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__apiaries_apiaries__["a" /* ApiariesPage */]);
+    };
+    HomePage.prototype.openFeedingPage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__feeding_feeding__["a" /* FeedingPage */]);
+    };
+    return HomePage;
+}());
+HomePage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\home\home.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Home</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <button ion-button full (click)="openApiariesPage()">Apiaries</button>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\home\home.html"*/
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
+], HomePage);
+
+var _a, _b;
+//# sourceMappingURL=home.js.map
+
+/***/ }),
+
+/***/ 214:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HiveInner; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__inspect_inner_inspect_inner__ = __webpack_require__(479);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inspect_create_inspect_create__ = __webpack_require__(480);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__inspect_inner_inspect_inner__ = __webpack_require__(482);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__inspect_create_inspect_create__ = __webpack_require__(483);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -37,24 +178,24 @@ var HiveInner = (function () {
 }());
 HiveInner = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-hive-inner',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\hive-inner\hive-inner.html"*/'<ion-header>\n\n\n\n    <ion-navbar color="primary">\n\n            <button ion-button menuToggle icon-only>\n\n                <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n            </button>\n\n            <ion-title>Hive inner</ion-title>\n\n            <ion-buttons end>\n\n                <button ion-button icon-only>\n\n                    <ion-icon name="ios-more-outline"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-toolbar>\n\n            <ion-segment [(ngModel)]="hive">\n\n                <ion-segment-button value="info">\n\n                    Hive Info\n\n                </ion-segment-button>\n\n                <ion-segment-button value="inspections">\n\n                    Inspections\n\n                </ion-segment-button>\n\n                <ion-segment-button value="stats">\n\n                    Statistics\n\n                </ion-segment-button>\n\n            </ion-segment>\n\n    </ion-toolbar>\n\n\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<ion-content>\n\n\n\n    <div [ngSwitch]="hive">\n\n        <ion-list *ngSwitchCase="\'info\'">\n\n\n\n            <ion-row style="height: 1rem"></ion-row>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Hive</h1>\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <ion-avatar item-left>\n\n                    <img src="./assets/img/hive-img.jpg">\n\n                </ion-avatar>\n\n                <h2>#1 Hive</h2>                            <!--Avilio pavadinimas Hive_name-->\n\n                <p>Last inspection: 2018-04-20</p>          <!--Paskutin�s (naujausios) darytos ap�i�ros data Inspection_date-->\n\n            </ion-item>\n\n\n\n            <ion-row>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-pulse"></ion-icon>\n\n                        <div>80% strengt</div>              <!--Naujausias �ra�as Bee_strength-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-thermometer"></ion-icon>\n\n                        <div>32&deg;C TEMP</div>            <!--Naujausias �ra�as Monitoring_temperature-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-water"></ion-icon>\n\n                        <div>25%</div>                      <!--Naujausias �ra�as Monitoring_humidity-->\n\n                    </button>\n\n                </ion-col>\n\n            </ion-row>\n\n\n\n            <ion-item>\n\n                <p>Status</p>\n\n                <h2>Active</h2>                             <!--Avilio statusas Hive_status\n\n                                                            1 => "Hive active"\n\n                                                            0 => "Hive inactive"-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Hive type</p>\n\n                <h2>Dadan hive</h2>                         <!--Avilio tipas Hive_type-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Bee Family</p>\n\n                <h2>Buckfast</h2>                           <!--Bi�i� �eimos veisl� Hive_family-->\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Queen status</h1>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <p>Name</p>\n\n                <h2>#1 Queen</h2>                           <!--Motin�l�s pavadinimas Queen_name-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Breed</p>\n\n                <h2>Carnica</h2>                            <!--Motin�l�s veisl� Queen_breed-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Date</p>\n\n                <h2>2018-04-10</h2>                         <!--Motin�l�s talpinimo � avil� data Queen_date-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>State</p>\n\n                <h2>Emerged</h2>                            <!--Queen_state-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Status</p>\n\n                <h2>Accepted</h2>                           <!--Queen_status-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Color</p>\n\n                <h2>Blue</h2>                               <!--Spalva pagal kuri� sprend�iam am�i� Queen_colour-->\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'inspections\'">\n\n\n\n            <ion-card (click)="openInspectInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/glass.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#1 Inspection</h2>                  <!--Inspection_name-->\n\n                    <p>Calm temper</p>                      <!--Bee_temper-->\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>No disease.</p>                      <!--Disease-->\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>80% strength</div>         <!--Bee_strength-->\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            Inspection date: 2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openInspectInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/glass.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#1 Inspection</h2>                  <!--Inspection_name-->\n\n                    <p>Calm temper</p>                      <!--Bee_temper-->\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>No disease.</p>                      <!--Disease-->\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>80% strength</div>         <!--Bee_strength-->\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            Inspection date: 2018-04-20     <!--Inspection_date-->\n\n                        </ion-note>\n\n                    </ion-col>\n\n\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-fab right bottom>\n\n                <button ion-fab color="primary" (click)="openInspectCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n            </ion-fab>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'stats\'">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Temperature</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Humidity</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Strength</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\hive-inner\hive-inner.html"*/
+        selector: 'page-hive-inner',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\hive-inner\hive-inner.html"*/'<ion-header>\n\n\n\n    <ion-navbar color="primary">\n\n            <button ion-button menuToggle icon-only>\n\n                <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n            </button>\n\n            <ion-title>Hive inner</ion-title>\n\n            <ion-buttons end>\n\n                <button ion-button icon-only>\n\n                    <ion-icon name="ios-more-outline"></ion-icon>\n\n                </button>\n\n            </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-toolbar>\n\n            <ion-segment [(ngModel)]="hive">\n\n                <ion-segment-button value="info">\n\n                    Hive Info\n\n                </ion-segment-button>\n\n                <ion-segment-button value="inspections">\n\n                    Inspections\n\n                </ion-segment-button>\n\n                <ion-segment-button value="stats">\n\n                    Statistics\n\n                </ion-segment-button>\n\n            </ion-segment>\n\n    </ion-toolbar>\n\n\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<ion-content>\n\n\n\n    <div [ngSwitch]="hive">\n\n        <ion-list *ngSwitchCase="\'info\'">\n\n\n\n            <ion-row style="height: 1rem"></ion-row>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Hive</h1>\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <ion-avatar item-left>\n\n                    <img src="./assets/img/hive-img.jpg">\n\n                </ion-avatar>\n\n                <h2>#1 Hive</h2>                            <!--Avilio pavadinimas Hive_name-->\n\n                <p>Last inspection: 2018-04-20</p>          <!--Paskutin�s (naujausios) darytos ap�i�ros data Inspection_date-->\n\n            </ion-item>\n\n\n\n            <ion-row>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-pulse"></ion-icon>\n\n                        <div>80% strengt</div>              <!--Naujausias �ra�as Bee_strength-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-thermometer"></ion-icon>\n\n                        <div>32&deg;C TEMP</div>            <!--Naujausias �ra�as Monitoring_temperature-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-water"></ion-icon>\n\n                        <div>25%</div>                      <!--Naujausias �ra�as Monitoring_humidity-->\n\n                    </button>\n\n                </ion-col>\n\n            </ion-row>\n\n\n\n            <ion-item>\n\n                <p>Status</p>\n\n                <h2>Active</h2>                             <!--Avilio statusas Hive_status\n\n                                                            1 => "Hive active"\n\n                                                            0 => "Hive inactive"-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Hive type</p>\n\n                <h2>Dadan hive</h2>                         <!--Avilio tipas Hive_type-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Bee Family</p>\n\n                <h2>Buckfast</h2>                           <!--Bi�i� �eimos veisl� Hive_family-->\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Queen status</h1>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <p>Name</p>\n\n                <h2>#1 Queen</h2>                           <!--Motin�l�s pavadinimas Queen_name-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Breed</p>\n\n                <h2>Carnica</h2>                            <!--Motin�l�s veisl� Queen_breed-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Date</p>\n\n                <h2>2018-04-10</h2>                         <!--Motin�l�s talpinimo � avil� data Queen_date-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>State</p>\n\n                <h2>Emerged</h2>                            <!--Queen_state-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Status</p>\n\n                <h2>Accepted</h2>                           <!--Queen_status-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Color</p>\n\n                <h2>Blue</h2>                               <!--Spalva pagal kuri� sprend�iam am�i� Queen_colour-->\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'inspections\'">\n\n\n\n            <ion-card (click)="openInspectInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/glass.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#1 Inspection</h2>                  <!--Inspection_name-->\n\n                    <p>Calm temper</p>                      <!--Bee_temper-->\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>No disease.</p>                      <!--Disease-->\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>80% strength</div>         <!--Bee_strength-->\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            Inspection date: 2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openInspectInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/glass.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#1 Inspection</h2>                  <!--Inspection_name-->\n\n                    <p>Calm temper</p>                      <!--Bee_temper-->\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>No disease.</p>                      <!--Disease-->\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>80% strength</div>         <!--Bee_strength-->\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            Inspection date: 2018-04-20     <!--Inspection_date-->\n\n                        </ion-note>\n\n                    </ion-col>\n\n\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-fab right bottom>\n\n                <button ion-fab color="primary" (click)="openInspectCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n            </ion-fab>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'stats\'">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Temperature</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Humidity</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Strength</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\hive-inner\hive-inner.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
 ], HiveInner);
 
 //# sourceMappingURL=hive-inner.js.map
 
 /***/ }),
 
-/***/ 211:
+/***/ 215:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedingPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__feeding_create_feeding_create__ = __webpack_require__(481);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeding_inner_feeding_inner__ = __webpack_require__(482);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__feeding_create_feeding_create__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeding_inner_feeding_inner__ = __webpack_require__(485);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -86,16 +227,16 @@ var FeedingPage = (function () {
 }());
 FeedingPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-feeding',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\feeding\feeding.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Feedings</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>                                     <!--Feeding_name-->\n\n            <p>Syrup</p>                                            <!--Feeding_product-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>                             <!--Feeding_notes-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>                        <!--Feeding_quantity, Feeding_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20                        <!--Feeding_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openFeedingCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\feeding\feeding.html"*/
+        selector: 'page-feeding',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\feeding\feeding.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Feedings</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>                                     <!--Feeding_name-->\n\n            <p>Syrup</p>                                            <!--Feeding_product-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>                             <!--Feeding_notes-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>                        <!--Feeding_quantity, Feeding_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20                        <!--Feeding_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openFeedingInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>\n\n            <p>Syrup</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Notes about feeding.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openFeedingCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\feeding\feeding.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], FeedingPage);
 
 //# sourceMappingURL=feeding.js.map
 
 /***/ }),
 
-/***/ 229:
+/***/ 232:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -108,21 +249,21 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 229;
+webpackEmptyAsyncContext.id = 232;
 
 /***/ }),
 
-/***/ 474:
+/***/ 478:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return RegisterPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(475);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hives_hives__ = __webpack_require__(483);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__harvest_harvest__ = __webpack_require__(485);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__treatment_treatment__ = __webpack_require__(488);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__feeding_feeding__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(477);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -138,85 +279,92 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var TabsPage = (function () {
-    function TabsPage() {
-        // this tells the tabs component which Pages
-        // should be each tab's root Page
-        this.tab1Root = __WEBPACK_IMPORTED_MODULE_1__home_home__["a" /* HomePage */];
-        this.tab2Root = __WEBPACK_IMPORTED_MODULE_2__hives_hives__["a" /* HivesPage */];
-        this.tab3Root = __WEBPACK_IMPORTED_MODULE_4__treatment_treatment__["a" /* TreatmentPage */];
-        this.tab4Root = __WEBPACK_IMPORTED_MODULE_3__harvest_harvest__["a" /* HarvestPage */];
-        this.tab5Root = __WEBPACK_IMPORTED_MODULE_5__feeding_feeding__["a" /* FeedingPage */];
-    }
-    return TabsPage;
-}());
-TabsPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n    <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="ios-home-outline"></ion-tab>\n\n    <ion-tab [root]="tab2Root" tabTitle="Hives" tabIcon="ios-browsers-outline"></ion-tab>\n\n    <ion-tab [root]="tab3Root" tabTitle="Treatments" tabIcon="ios-medkit-outline"></ion-tab>\n\n    <ion-tab [root]="tab4Root" tabTitle="Harvest" tabIcon="ios-color-fill-outline"></ion-tab>\n\n    <ion-tab [root]="tab5Root" tabTitle="Feedings" tabIcon="ios-restaurant-outline"></ion-tab>\n\n\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\tabs\tabs.html"*/
-    }),
-    __metadata("design:paramtypes", [])
-], TabsPage);
-
-//# sourceMappingURL=tabs.js.map
-
-/***/ }),
-
-/***/ 475:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__apiaries_apiaries__ = __webpack_require__(476);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__feeding_feeding__ = __webpack_require__(211);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var HomePage = (function () {
-    function HomePage(navCtrl) {
+var RegisterPage = (function () {
+    function RegisterPage(navCtrl, loadingCtrl, toastCtrl, http) {
         this.navCtrl = navCtrl;
+        this.loadingCtrl = loadingCtrl;
+        this.toastCtrl = toastCtrl;
+        this.http = http;
+        this.user = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            number: '',
+            password: '',
+            confirmPassword: ''
+        };
     }
-    HomePage.prototype.onLink = function (url) {
-        window.open(url);
+    RegisterPage.prototype.processlogin = function () {
+        var _this = this;
+        console.log(this.user);
+        var loader = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: "Please wait...",
+        });
+        loader.present();
+        if (this.user.password != this.user.confirmPassword) {
+        }
+        else {
+            this.http.post('http://beeapi.azurewebsites.net/api/beekeeper', this.user).map(function (res) { return res.json(); }).subscribe(function (data) {
+                if (data) {
+                    _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__login_login__["a" /* LoginPage */], { email: _this.user.email });
+                    loader.dismiss();
+                    _this.user = {
+                        firstName: '',
+                        lastName: '',
+                        email: '',
+                        phone: '',
+                        number: '',
+                        password: '',
+                        confirmPassword: ''
+                    };
+                }
+            }, function (error) {
+                console.log(error);
+                if (error.status == 400) {
+                    loader.dismiss();
+                    var errorMessage = JSON.parse(error._body);
+                    _this.popAlert(errorMessage.message, 'warning', 7000, 'bottom');
+                }
+            });
+        }
     };
-    HomePage.prototype.openApiariesPage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__apiaries_apiaries__["a" /* ApiariesPage */]);
+    RegisterPage.prototype.popAlert = function (message, type, duration, position) {
+        var toast = this.toastCtrl.create({
+            message: message,
+            cssClass: 'toast-' + type,
+            duration: duration,
+            dismissOnPageChange: true,
+            position: position,
+        });
+        toast.present();
     };
-    HomePage.prototype.openFeedingPage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__feeding_feeding__["a" /* FeedingPage */]);
-    };
-    return HomePage;
+    return RegisterPage;
 }());
-HomePage = __decorate([
+RegisterPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\home\home.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Home</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <button ion-button full  (click)="openApiariesPage()">Apiaries</button>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\home\home.html"*/
+        selector: 'page-register',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\register\register.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <ion-title>Register</ion-title>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <p padding>\n\n        Please fill in the form to continue with your sign in.\n\n    </p>\n\n\n\n    <ion-list padding>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>First Name</ion-label>\n\n            <ion-input type="text" [(ngModel)]="user.firstName"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Last Name</ion-label>\n\n            <ion-input type="text" [(ngModel)]="user.lastName"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Email</ion-label>\n\n            <ion-input type="email" [(ngModel)]="user.email"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Phone</ion-label>\n\n            <ion-input type="number" [(ngModel)]="user.phone"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Number</ion-label>\n\n            <ion-input type="number" [(ngModel)]="user.number"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Password</ion-label>\n\n            <ion-input type="password" [(ngModel)]="user.password"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Confirm Password</ion-label>\n\n            <ion-input type="password" [(ngModel)]="user.confirmPassword"></ion-input>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n    <div>\n\n        <button ion-button full (click)="processlogin()">Register</button>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\register\register.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
-], HomePage);
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* LoadingController */],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ToastController */],
+        __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]])
+], RegisterPage);
 
-//# sourceMappingURL=home.js.map
+//# sourceMappingURL=register.js.map
 
 /***/ }),
 
-/***/ 476:
+/***/ 479:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiariesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__apiary_create_apiary_create__ = __webpack_require__(477);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__apiary_inner_apiary_inner__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__apiary_create_apiary_create__ = __webpack_require__(480);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__apiary_inner_apiary_inner__ = __webpack_require__(481);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -250,22 +398,22 @@ var ApiariesPage = (function () {
 }());
 ApiariesPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-apiaries',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\apiaries\apiaries.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Apiaries</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openApiaryInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/apiary.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Apiary</h2>      <!--Apiary_name-->\n\n            <p>Vilnius, Lietuva</p> <!--Apiary_place-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>45 active and 5 not active hives in apiary.</p>  <!--Atvaizduoja kiek bityne i� viso aktyvi� ir neaktyvi� avili� pagal Hive_status atribut�-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength AVG</div>                 <!--Vidutinis stiprumas bityne pagal atribut� Bee_strength-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>                         <!--Vidutin� temperat�ra bityne pagal atribut� Monitoring_temperature-->\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openApiaryInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/apiary.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Apiary</h2>\n\n            <p>Vilnius, Lietuva</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>26 active and 2 not active hives in apiary.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength AVG</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openApiaryCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\apiaries\apiaries.html"*/
+        selector: 'page-apiaries',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\apiaries\apiaries.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Apiaries</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openApiaryInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/apiary.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Apiary</h2>      <!--Apiary_name-->\n\n            <p>Vilnius, Lietuva</p> <!--Apiary_place-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>45 active and 5 not active hives in apiary.</p>  <!--Atvaizduoja kiek bityne i� viso aktyvi� ir neaktyvi� avili� pagal Hive_status atribut�-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength AVG</div>                 <!--Vidutinis stiprumas bityne pagal atribut� Bee_strength-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>                         <!--Vidutin� temperat�ra bityne pagal atribut� Monitoring_temperature-->\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openApiaryInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/apiary.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Apiary</h2>\n\n            <p>Vilnius, Lietuva</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>26 active and 2 not active hives in apiary.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength AVG</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openApiaryCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\apiaries\apiaries.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
 ], ApiariesPage);
 
 //# sourceMappingURL=apiaries.js.map
 
 /***/ }),
 
-/***/ 477:
+/***/ 480:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiaryCreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -295,23 +443,23 @@ var ApiaryCreatePage = (function () {
 }());
 ApiaryCreatePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-apiary-create',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\apiary-create\apiary-create.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n    <ion-title>Apiaries</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Apiary</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Apiary Name</ion-label>\n\n            <ion-input placeholder="Enter apiary name"></ion-input>         <!--Apiary_name-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Location</ion-label>\n\n            <ion-input placeholder="Enter town, village"></ion-input>       <!--Apiary_place-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Latitude</ion-label>\n\n            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_latitude-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Longtitude</ion-label>\n\n            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_longtitude-->    \n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block type="submit">Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\apiary-create\apiary-create.html"*/
+        selector: 'page-apiary-create',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\apiary-create\apiary-create.html"*/'<ion-header>\n\n\n\n  <ion-navbar color="primary">\n\n    <ion-title>Apiaries</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Apiary</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Apiary Name</ion-label>\n\n            <ion-input placeholder="Enter apiary name"></ion-input>         <!--Apiary_name-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Location</ion-label>\n\n            <ion-input placeholder="Enter town, village"></ion-input>       <!--Apiary_place-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Latitude</ion-label>\n\n            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_latitude-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Longtitude</ion-label>\n\n            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_longtitude-->    \n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block type="submit">Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\apiary-create\apiary-create.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], ApiaryCreatePage);
 
 //# sourceMappingURL=apiary-create.js.map
 
 /***/ }),
 
-/***/ 478:
+/***/ 481:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ApiaryInnerPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hive_inner_hive_inner__ = __webpack_require__(210);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hive_inner_hive_inner__ = __webpack_require__(214);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -346,22 +494,22 @@ var ApiaryInnerPage = (function () {
 }());
 ApiaryInnerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-apiary-inner',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\apiary-inner\apiary-inner.html"*/'<ion-header>\n\n\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Apiary inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-toolbar>\n\n        <ion-segment [(ngModel)]="apiary">\n\n            <ion-segment-button value="info">\n\n                Apiary Info\n\n            </ion-segment-button>\n\n            <ion-segment-button value="hives">\n\n                Hives in Apiary\n\n            </ion-segment-button>\n\n            <ion-segment-button value="stats">\n\n                Statistics\n\n            </ion-segment-button>\n\n        </ion-segment>\n\n    </ion-toolbar>\n\n\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<ion-content>\n\n\n\n    <div [ngSwitch]="apiary">\n\n        <ion-list *ngSwitchCase="\'info\'">\n\n\n\n            <ion-row style="height: 1rem"></ion-row>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Apiary</h1>\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <ion-avatar item-left>\n\n                    <img src="./assets/img/apiary.jpg">\n\n                </ion-avatar>\n\n                <h2>#1 Apiary</h2>                                      <!--Apiary_name-->\n\n                <p>Vilnius, Lietuva</p>                                 <!--Apiary_place-->\n\n            </ion-item>\n\n            <ion-row>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-pulse"></ion-icon>\n\n                        <div>80% strengt</div>                          <!--Vidutinis stiprumas bityne pagal atribut� Bee_strength-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-thermometer"></ion-icon>\n\n                        <div>32&deg;C TEMP</div>                        <!--Vidutin� temperat�ra bityne pagal atribut� Monitoring_temperature-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-water"></ion-icon>\n\n                        <div>25%</div>                                  <!--Vidutin� dr�gm� bityne pagal atribut� Monitoring_humidity-->\n\n                    </button>\n\n                </ion-col>\n\n            </ion-row>\n\n\n\n            <ion-item>\n\n                <p>Active hives</p>\n\n                <h2>45 active hives</h2>                                <!--Atvaizduoja kiek bityne i� viso aktyvi� avili� pagal Hive_status atribut�-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Inactive hives</p>\n\n                <h2>5 inactive hives</h2>                               <!--Atvaizduoja kiek bityne neaktyvi� avili� pagal Hive_status atribut�-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Location</p>\n\n                <h2>53.9752321, 24.6988943</h2>                         <!--Atvaizduoja bityno ilgum� ir platum�. Apiary_longtitude ir Apiary_latitude-->\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Bee families in apiary</h1>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <p>Carnica</p>\n\n                <h2>40 bee families</h2>                              \n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Buckfast</p>\n\n                <h2>5 bee families</h2>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'hives\'">\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#1 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Too high temperature.</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>90% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>40&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#2 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Everything is fine!</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>100% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>32&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#3 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Everything is fine!</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>90% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>33&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#4 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Excessive humidity.</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>80% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>32&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'stats\'">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Temperature</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Humidity</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Strength</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\apiary-inner\apiary-inner.html"*/
+        selector: 'page-apiary-inner',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\apiary-inner\apiary-inner.html"*/'<ion-header>\n\n\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Apiary inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-toolbar>\n\n        <ion-segment [(ngModel)]="apiary">\n\n            <ion-segment-button value="info">\n\n                Apiary Info\n\n            </ion-segment-button>\n\n            <ion-segment-button value="hives">\n\n                Hives in Apiary\n\n            </ion-segment-button>\n\n            <ion-segment-button value="stats">\n\n                Statistics\n\n            </ion-segment-button>\n\n        </ion-segment>\n\n    </ion-toolbar>\n\n\n\n</ion-header>\n\n\n\n\n\n\n\n\n\n\n\n<ion-content>\n\n\n\n    <div [ngSwitch]="apiary">\n\n        <ion-list *ngSwitchCase="\'info\'">\n\n\n\n            <ion-row style="height: 1rem"></ion-row>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Apiary</h1>\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <ion-avatar item-left>\n\n                    <img src="./assets/img/apiary.jpg">\n\n                </ion-avatar>\n\n                <h2>#1 Apiary</h2>                                      <!--Apiary_name-->\n\n                <p>Vilnius, Lietuva</p>                                 <!--Apiary_place-->\n\n            </ion-item>\n\n            <ion-row>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-pulse"></ion-icon>\n\n                        <div>80% strengt</div>                          <!--Vidutinis stiprumas bityne pagal atribut� Bee_strength-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-thermometer"></ion-icon>\n\n                        <div>32&deg;C TEMP</div>                        <!--Vidutin� temperat�ra bityne pagal atribut� Monitoring_temperature-->\n\n                    </button>\n\n                </ion-col>\n\n                <ion-col>\n\n                    <button ion-button icon-left clear small>\n\n                        <ion-icon name="ios-water"></ion-icon>\n\n                        <div>25%</div>                                  <!--Vidutin� dr�gm� bityne pagal atribut� Monitoring_humidity-->\n\n                    </button>\n\n                </ion-col>\n\n            </ion-row>\n\n\n\n            <ion-item>\n\n                <p>Active hives</p>\n\n                <h2>45 active hives</h2>                                <!--Atvaizduoja kiek bityne i� viso aktyvi� avili� pagal Hive_status atribut�-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Inactive hives</p>\n\n                <h2>5 inactive hives</h2>                               <!--Atvaizduoja kiek bityne neaktyvi� avili� pagal Hive_status atribut�-->\n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Location</p>\n\n                <h2>53.9752321, 24.6988943</h2>                         <!--Atvaizduoja bityno ilgum� ir platum�. Apiary_longtitude ir Apiary_latitude-->\n\n            </ion-item>\n\n\n\n            <ion-item no-lines>\n\n                <h1>Bee families in apiary</h1>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <p>Carnica</p>\n\n                <h2>40 bee families</h2>                              \n\n            </ion-item>\n\n            <ion-item>\n\n                <p>Buckfast</p>\n\n                <h2>5 bee families</h2>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'hives\'">\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#1 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Too high temperature.</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>90% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>40&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#2 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Everything is fine!</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>100% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>32&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#3 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Everything is fine!</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>90% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>33&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n            <ion-card (click)="openHiveInnerPage()">\n\n                <ion-item>\n\n                    <ion-avatar item-left>\n\n                        <img src="./assets/img/hive-img.jpg">\n\n                    </ion-avatar>\n\n                    <h2>#4 Avilys</h2>\n\n                    <p>Active hive</p>\n\n                </ion-item>\n\n                <ion-card-content>\n\n                    <p>Excessive humidity.</p>\n\n                </ion-card-content>\n\n                <ion-row>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-pulse"></ion-icon>\n\n                            <div>80% strength</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col>\n\n                        <button ion-button icon-left clear small>\n\n                            <ion-icon name="ios-thermometer"></ion-icon>\n\n                            <div>32&deg;C</div>\n\n                        </button>\n\n                    </ion-col>\n\n                    <ion-col center text-center>\n\n                        <ion-note>\n\n                            2018-04-20\n\n                        </ion-note>\n\n                    </ion-col>\n\n                </ion-row>\n\n            </ion-card>\n\n\n\n\n\n\n\n        </ion-list>\n\n\n\n        <ion-list *ngSwitchCase="\'stats\'">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Temperature</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Humidity</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n            <ion-item no-lines>\n\n                <h1>Strength</h1>\n\n            </ion-item>\n\n            <img src="./assets/img/Chart-JS.png">\n\n\n\n        </ion-list>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\apiary-inner\apiary-inner.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], ApiaryInnerPage);
 
 //# sourceMappingURL=apiary-inner.js.map
 
 /***/ }),
 
-/***/ 479:
+/***/ 482:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InspectInnerPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -391,22 +539,22 @@ var InspectInnerPage = (function () {
 }());
 InspectInnerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-inspect-inner',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\inspect-inner\inspect-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Inspection inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Inspection</h1>                     \n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/glass.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Inspection</h2>                  <!--Inspection_name-->\n\n            <p>Calm temper</p>                      <!--Bee_temper-->\n\n        </ion-item>\n\n\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>         <!--Bee_strength-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Inspection date: 2018-04-20     <!--Inspection_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Diseases</h1>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <p>Disease</p>\n\n            <h2>No disease</h2>                     <!--Disease-->\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Frames</h1>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <p>Frames with bees</p>\n\n            <h2>12 frames</h2>                      <!--Frames_bees-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Honey frames in body</p>\n\n            <h2>4 frames</h2>                       <!--Frames_honey-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Honey frames in supers</p>\n\n            <h2>30 frames</h2>                      <!--Frames_honey_supers-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Bee bread</p>                        <!--neaisku ar deti-->\n\n            <h2>2 frames</h2>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Drones</h1>         \n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <p>Drone cells</p>\n\n            <h2>Yes</h2>                            <!--Drones-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Drones</p>\n\n            <h2>No</h2>                             <!--Drone_cells-->\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\inspect-inner\inspect-inner.html"*/
+        selector: 'page-inspect-inner',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\inspect-inner\inspect-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Inspection inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Inspection</h1>                     \n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/glass.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Inspection</h2>                  <!--Inspection_name-->\n\n            <p>Calm temper</p>                      <!--Bee_temper-->\n\n        </ion-item>\n\n\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>         <!--Bee_strength-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Inspection date: 2018-04-20     <!--Inspection_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Diseases</h1>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <p>Disease</p>\n\n            <h2>No disease</h2>                     <!--Disease-->\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Frames</h1>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <p>Frames with bees</p>\n\n            <h2>12 frames</h2>                      <!--Frames_bees-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Honey frames in body</p>\n\n            <h2>4 frames</h2>                       <!--Frames_honey-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Honey frames in supers</p>\n\n            <h2>30 frames</h2>                      <!--Frames_honey_supers-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Bee bread</p>                        <!--neaisku ar deti-->\n\n            <h2>2 frames</h2>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Drones</h1>         \n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <p>Drone cells</p>\n\n            <h2>Yes</h2>                            <!--Drones-->\n\n        </ion-item>\n\n        <ion-item>\n\n            <p>Drones</p>\n\n            <h2>No</h2>                             <!--Drone_cells-->\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\inspect-inner\inspect-inner.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], InspectInnerPage);
 
 //# sourceMappingURL=inspect-inner.js.map
 
 /***/ }),
 
-/***/ 480:
+/***/ 483:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return InspectCreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -430,22 +578,22 @@ var InspectCreatePage = (function () {
 }());
 InspectCreatePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-inspect-create',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\inspect-create\inspect-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Inspection \n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Inspection</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Inspection name</ion-label>              <!--Inspection_name-->\n\n            <ion-input placeholder="Enter inspection name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee temper</ion-label>                   <!--Bee_temper-->\n\n            <ion-select [(ngModel)]="bee-temper" interface="action-sheet" placeholder="Select bee temper">\n\n                <ion-option value="a">Aggressive</ion-option>\n\n                <ion-option value="c">Calm</ion-option>\n\n                <ion-option value="n">Nervous</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee strength</ion-label>                 <!--Bee_strength-->\n\n            <ion-select [(ngModel)]="bee-strength" interface="action-sheet" placeholder="Select bee strength">\n\n                <ion-option value="ten">10%</ion-option>\n\n                <ion-option value="thirty">30%</ion-option>\n\n                <ion-option value="fifty">50%</ion-option>\n\n                <ion-option value="seventy">70%</ion-option>\n\n                <ion-option value="ninety">90%</ion-option>\n\n                <ion-option value="hundread">100%</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Frames:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Frames with bees</ion-label>             <!--Frames_bees-->\n\n            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Frames with honey in body</ion-label>    <!--Frames_honey-->\n\n            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Frames with honey in supers</ion-label>  <!--Frames_honey_supers-->\n\n            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Drones:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Drones</ion-label>                       <!--Drones-->\n\n            <ion-select [(ngModel)]="drones" interface="action-sheet" placeholder="Drones">\n\n                <ion-option value="no">No</ion-option>\n\n                <ion-option value="yes">Yes</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Drone cells</ion-label>                  <!--Drone_cells-->\n\n            <ion-select [(ngModel)]="drones" interface="action-sheet" placeholder="Drone cells">\n\n                <ion-option value="no-cells">No</ion-option>\n\n                <ion-option value="yes-cells">Yes</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Diseases:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Disease</ion-label>\n\n            <ion-select [(ngModel)]="inspection-disease" interface="action-sheet" placeholder="Select disease type">\n\n                <ion-option value="none">No disease</ion-option>\n\n                <ion-option value="acarine">Acarine</ion-option>\n\n                <ion-option value="foul-brood">Foul brood</ion-option>\n\n                <ion-option value="nosema">Nosema</ion-option>\n\n                <ion-option value="varoosis">Varoosis</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\inspect-create\inspect-create.html"*/
+        selector: 'page-inspect-create',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\inspect-create\inspect-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Inspection \n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Inspection</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Inspection name</ion-label>              <!--Inspection_name-->\n\n            <ion-input placeholder="Enter inspection name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee temper</ion-label>                   <!--Bee_temper-->\n\n            <ion-select [(ngModel)]="bee-temper" interface="action-sheet" placeholder="Select bee temper">\n\n                <ion-option value="a">Aggressive</ion-option>\n\n                <ion-option value="c">Calm</ion-option>\n\n                <ion-option value="n">Nervous</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee strength</ion-label>                 <!--Bee_strength-->\n\n            <ion-select [(ngModel)]="bee-strength" interface="action-sheet" placeholder="Select bee strength">\n\n                <ion-option value="ten">10%</ion-option>\n\n                <ion-option value="thirty">30%</ion-option>\n\n                <ion-option value="fifty">50%</ion-option>\n\n                <ion-option value="seventy">70%</ion-option>\n\n                <ion-option value="ninety">90%</ion-option>\n\n                <ion-option value="hundread">100%</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Frames:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Frames with bees</ion-label>             <!--Frames_bees-->\n\n            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Frames with honey in body</ion-label>    <!--Frames_honey-->\n\n            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Frames with honey in supers</ion-label>  <!--Frames_honey_supers-->\n\n            <ion-input type="number" min="0" max="16" placeholder="Enter number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Drones:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Drones</ion-label>                       <!--Drones-->\n\n            <ion-select [(ngModel)]="drones" interface="action-sheet" placeholder="Drones">\n\n                <ion-option value="no">No</ion-option>\n\n                <ion-option value="yes">Yes</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Drone cells</ion-label>                  <!--Drone_cells-->\n\n            <ion-select [(ngModel)]="drones" interface="action-sheet" placeholder="Drone cells">\n\n                <ion-option value="no-cells">No</ion-option>\n\n                <ion-option value="yes-cells">Yes</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Diseases:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Disease</ion-label>\n\n            <ion-select [(ngModel)]="inspection-disease" interface="action-sheet" placeholder="Select disease type">\n\n                <ion-option value="none">No disease</ion-option>\n\n                <ion-option value="acarine">Acarine</ion-option>\n\n                <ion-option value="foul-brood">Foul brood</ion-option>\n\n                <ion-option value="nosema">Nosema</ion-option>\n\n                <ion-option value="varoosis">Varoosis</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\inspect-create\inspect-create.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], InspectCreatePage);
 
 //# sourceMappingURL=inspect-create.js.map
 
 /***/ }),
 
-/***/ 481:
+/***/ 484:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedingCreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -475,22 +623,22 @@ var FeedingCreatePage = (function () {
 }());
 FeedingCreatePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-feeding-create',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\feeding-create\feeding-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Feeding\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Feeding</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Feeding name</ion-label>     <!--Feeding_name-->\n\n            <ion-input placeholder="Enter feeding name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>             <!--Feeding_date-->\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Feeding product</ion-label>  <!--Feeding_product-->\n\n            <ion-select [(ngModel)]="feeding-product" interface="action-sheet" placeholder="Select feeding product">\n\n                <ion-option value="pollen">Pollen</ion-option>\n\n                <ion-option value="sugar">Sugar</ion-option>\n\n                <ion-option value="syrup">Syrup</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Quantity</ion-label>         <!--Feeding_quantity-->\n\n            <ion-input placeholder="Enter quantity"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Unit</ion-label>             <!--Feeding_unit-->\n\n            <ion-select [(ngModel)]="feeding-unit" interface="action-sheet" placeholder="Select unit">\n\n                <ion-option value="g">Grams</ion-option>\n\n                <ion-option value="g">Kilograms</ion-option>\n\n                <ion-option value="ml">Milliliters</ion-option>\n\n                <ion-option value="l">Liters</ion-option>\n\n                <ion-option value="f">Frames</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Notes</ion-label>            <!--Feeding_notes-->\n\n            <ion-input placeholder="Add notes"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\feeding-create\feeding-create.html"*/
+        selector: 'page-feeding-create',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\feeding-create\feeding-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Feeding\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Feeding</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Feeding name</ion-label>     <!--Feeding_name-->\n\n            <ion-input placeholder="Enter feeding name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>             <!--Feeding_date-->\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Feeding product</ion-label>  <!--Feeding_product-->\n\n            <ion-select [(ngModel)]="feeding-product" interface="action-sheet" placeholder="Select feeding product">\n\n                <ion-option value="pollen">Pollen</ion-option>\n\n                <ion-option value="sugar">Sugar</ion-option>\n\n                <ion-option value="syrup">Syrup</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Quantity</ion-label>         <!--Feeding_quantity-->\n\n            <ion-input placeholder="Enter quantity"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Unit</ion-label>             <!--Feeding_unit-->\n\n            <ion-select [(ngModel)]="feeding-unit" interface="action-sheet" placeholder="Select unit">\n\n                <ion-option value="g">Grams</ion-option>\n\n                <ion-option value="g">Kilograms</ion-option>\n\n                <ion-option value="ml">Milliliters</ion-option>\n\n                <ion-option value="l">Liters</ion-option>\n\n                <ion-option value="f">Frames</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Notes</ion-label>            <!--Feeding_notes-->\n\n            <ion-input placeholder="Add notes"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\feeding-create\feeding-create.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], FeedingCreatePage);
 
 //# sourceMappingURL=feeding-create.js.map
 
 /***/ }),
 
-/***/ 482:
+/***/ 485:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FeedingInnerPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -520,107 +668,24 @@ var FeedingInnerPage = (function () {
 }());
 FeedingInnerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-feeding-inner',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\feeding-inner\feeding-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Feeding Inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Feeding</h1>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>                                 <!--Feeding_name-->\n\n            <p>Syrup</p>                                        <!--Feeding_product-->\n\n        </ion-item>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>                    <!--Feeding quantity, Feeding_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20                    <!--Feeding_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item>\n\n            <p>Feeding notes</p>\n\n            <h2>Some notes about feeding.</h2>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\feeding-inner\feeding-inner.html"*/
+        selector: 'page-feeding-inner',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\feeding-inner\feeding-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Feeding Inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Feeding</h1>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/sugar.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Feeding</h2>                                 <!--Feeding_name-->\n\n            <p>Syrup</p>                                        <!--Feeding_product-->\n\n        </ion-item>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-restaurant"></ion-icon>\n\n                    <div>10kg per hive</div>                    <!--Feeding quantity, Feeding_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Feeding date: 2018-04-20                    <!--Feeding_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item>\n\n            <p>Feeding notes</p>\n\n            <h2>Some notes about feeding.</h2>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\feeding-inner\feeding-inner.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], FeedingInnerPage);
 
 //# sourceMappingURL=feeding-inner.js.map
 
 /***/ }),
 
-/***/ 483:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HivesPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hive_create_hive_create__ = __webpack_require__(484);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hive_inner_hive_inner__ = __webpack_require__(210);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var HivesPage = (function () {
-    function HivesPage(navCtrl) {
-        this.navCtrl = navCtrl;
-    }
-    HivesPage.prototype.openHivePage = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__hive_create_hive_create__["a" /* HiveCreate */]);
-    };
-    HivesPage.prototype.openHiveInner = function () {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__hive_inner_hive_inner__["a" /* HiveInner */]);
-    };
-    return HivesPage;
-}());
-HivesPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-hives',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\hives\hives.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Hives</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Avilys</h2>                                  <!--Avilio pavadinimas Hive_name-->\n\n            <p>Hive active</p>\n\n            <!--Avilio statusas Hive_status\n\n                1 => "Hive active"\n\n                0 => "Hive inactive"\n\n            -->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Too high temperature.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>90% strength</div>                     <!--Naujausias �ra�as Bee_strength-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>40&deg;C</div>                         <!--Naujausias �ra�as Monitoring_temperature-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20                                  <!--Paskutin�s (naujausios) darytos ap�i�ros data Inspection_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openHivePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\hives\hives.html"*/
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
-], HivesPage);
-
-//# sourceMappingURL=hives.js.map
-
-/***/ }),
-
-/***/ 484:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HiveCreate; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var HiveCreate = (function () {
-    function HiveCreate(navCtrl) {
-        this.navCtrl = navCtrl;
-    }
-    HiveCreate.prototype.goBack = function () {
-        this.navCtrl.pop();
-    };
-    return HiveCreate;
-}());
-HiveCreate = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'hive-create',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\hive-create\hive-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Hives\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Hive</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Hive Number</ion-label>      <!--Hive_name-->\n\n            <ion-input placeholder="Enter hive number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Hive type</ion-label>             <!--Hive_type-->\n\n            <ion-select [(ngModel)]="hive-type" interface="action-sheet" placeholder="Select hive type">\n\n                <ion-option value="vertical">Vertical</ion-option>\n\n                <ion-option value="horizontal">Horizontal</ion-option>\n\n                <ion-option value="nucleus">Nucleus</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Hive status</ion-label>             <!--Hive_status-->\n\n            <ion-select [(ngModel)]="hive-status" interface="action-sheet" placeholder="Select hive status">\n\n                <ion-option value="active">Active</ion-option>\n\n                <ion-option value="inactive">Inactive</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Bee family info:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee family</ion-label>             <!--Hive_family-->\n\n            <ion-select [(ngModel)]="bee-family" interface="action-sheet" placeholder="Select bee family">\n\n                <ion-option value="buckfast">Buckfast</ion-option>\n\n                <ion-option value="carnica">Carnica</ion-option>\n\n                <ion-option value="other">Other</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee family origin</ion-label>             <!--Hive_family_origin-->\n\n            <ion-select [(ngModel)]="bee-family-origin" interface="action-sheet" placeholder="Select bee family origin">\n\n                <ion-option value="purchase">Purchase</ion-option>\n\n                <ion-option value="swarming">Natural swarming</ion-option>\n\n                <ion-option value="loss">Loss</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-row>\n\n            <ion-col padding width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline click="goBack()">Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col padding width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\hive-create\hive-create.html"*/
-    }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
-], HiveCreate);
-
-//# sourceMappingURL=hive-create.js.map
-
-/***/ }),
-
-/***/ 485:
+/***/ 486:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HarvestPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__harvest_create_harvest_create__ = __webpack_require__(486);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__harvest_inner_harvest_inner__ = __webpack_require__(487);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__harvest_create_harvest_create__ = __webpack_require__(487);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__harvest_inner_harvest_inner__ = __webpack_require__(488);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -652,22 +717,22 @@ var HarvestPage = (function () {
 }());
 HarvestPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-harvest',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\harvest\harvest.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Harvest</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openHarvestInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/honey3.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Honey spring</h2>                            <!--Harvest_name-->\n\n            <p>Honey</p>                                        <!--Harvest_product-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes about harvest.</p>                    <!--Harvest_notes-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-color-fill"></ion-icon>\n\n                    <div>120 kg</div>                           <!--Harvest_quantity, Havest_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Harvest date: 2018-04-20                    <!--Harvest_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHarvestInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/honey3.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Honey summer</h2>\n\n            <p>Honey</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes about harvest.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-color-fill"></ion-icon>\n\n                    <div>120 kg</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Harvest date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openHarvestCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\harvest\harvest.html"*/
+        selector: 'page-harvest',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\harvest\harvest.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Harvest</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openHarvestInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/honey3.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Honey spring</h2>                            <!--Harvest_name-->\n\n            <p>Honey</p>                                        <!--Harvest_product-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes about harvest.</p>                    <!--Harvest_notes-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-color-fill"></ion-icon>\n\n                    <div>120 kg</div>                           <!--Harvest_quantity, Havest_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Harvest date: 2018-04-20                    <!--Harvest_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHarvestInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/honey3.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Honey summer</h2>\n\n            <p>Honey</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes about harvest.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-color-fill"></ion-icon>\n\n                    <div>120 kg</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Harvest date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openHarvestCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\harvest\harvest.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], HarvestPage);
 
 //# sourceMappingURL=harvest.js.map
 
 /***/ }),
 
-/***/ 486:
+/***/ 487:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HarvestCreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -697,22 +762,22 @@ var HarvestCreatePage = (function () {
 }());
 HarvestCreatePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-harvest-create',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\harvest-create\harvest-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Harvest\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Harvest</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Harvest name</ion-label>     <!--Harvest_name-->\n\n            <ion-input placeholder="Enter harvest name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>             <!--Harvest_date-->\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Harvest product</ion-label>  <!--Harvest_product-->\n\n            <ion-select [(ngModel)]="harvest-product" interface="action-sheet" placeholder="Select harvest product">\n\n                <ion-option value="bee-bread">Bee bread</ion-option>\n\n                <ion-option value="bee-brood">Bee brood</ion-option>\n\n                <ion-option value="beewax">Beewax</ion-option>\n\n                <ion-option value="honey">Honey</ion-option>\n\n                <ion-option value="pollen">Pollen</ion-option>\n\n                <ion-option value="bee-bread">Propolis</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Quantity</ion-label>         <!--Harvest_quantity-->\n\n            <ion-input placeholder="Enter quantity"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Unit</ion-label>             <!--Harvest_unit-->\n\n            <ion-select [(ngModel)]="harvest-unit" interface="action-sheet" placeholder="Select unit">\n\n                <ion-option value="g">Grams</ion-option>\n\n                <ion-option value="g">Kilograms</ion-option>\n\n                <ion-option value="ml">Milliliters</ion-option>\n\n                <ion-option value="l">Liters</ion-option>\n\n                <ion-option value="f">Frames</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Notes</ion-label>            <!--Harvest_notes-->\n\n            <ion-input placeholder="Add notes"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\harvest-create\harvest-create.html"*/
+        selector: 'page-harvest-create',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\harvest-create\harvest-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Harvest\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Harvest</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Harvest name</ion-label>     <!--Harvest_name-->\n\n            <ion-input placeholder="Enter harvest name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>             <!--Harvest_date-->\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Harvest product</ion-label>  <!--Harvest_product-->\n\n            <ion-select [(ngModel)]="harvest-product" interface="action-sheet" placeholder="Select harvest product">\n\n                <ion-option value="bee-bread">Bee bread</ion-option>\n\n                <ion-option value="bee-brood">Bee brood</ion-option>\n\n                <ion-option value="beewax">Beewax</ion-option>\n\n                <ion-option value="honey">Honey</ion-option>\n\n                <ion-option value="pollen">Pollen</ion-option>\n\n                <ion-option value="bee-bread">Propolis</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Quantity</ion-label>         <!--Harvest_quantity-->\n\n            <ion-input placeholder="Enter quantity"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Unit</ion-label>             <!--Harvest_unit-->\n\n            <ion-select [(ngModel)]="harvest-unit" interface="action-sheet" placeholder="Select unit">\n\n                <ion-option value="g">Grams</ion-option>\n\n                <ion-option value="g">Kilograms</ion-option>\n\n                <ion-option value="ml">Milliliters</ion-option>\n\n                <ion-option value="l">Liters</ion-option>\n\n                <ion-option value="f">Frames</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Notes</ion-label>            <!--Harvest_notes-->\n\n            <ion-input placeholder="Add notes"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\harvest-create\harvest-create.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], HarvestCreatePage);
 
 //# sourceMappingURL=harvest-create.js.map
 
 /***/ }),
 
-/***/ 487:
+/***/ 488:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HarvestInnerPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -736,24 +801,107 @@ var HarvestInnerPage = (function () {
 }());
 HarvestInnerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-harvest-inner',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\harvest-inner\harvest-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Harvest Inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Harvest</h1>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/honey3.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Honey spring</h2>                            <!--Harvest_name-->\n\n            <p>Honey</p>                                        <!--Harvest_product-->\n\n        </ion-item>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-color-fill"></ion-icon>\n\n                    <div>120 kg</div>                           <!--Harvest_quantity, Harvest_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Harvest date: 2018-04-20                    <!--Harvest_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item>\n\n            <p>Notes</p>\n\n            <h2>Some text about something.</h2>                 <!--Harvest_notes-->\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\harvest-inner\harvest-inner.html"*/
+        selector: 'page-harvest-inner',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\harvest-inner\harvest-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Harvest Inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Harvest</h1>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/honey3.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Honey spring</h2>                            <!--Harvest_name-->\n\n            <p>Honey</p>                                        <!--Harvest_product-->\n\n        </ion-item>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-color-fill"></ion-icon>\n\n                    <div>120 kg</div>                           <!--Harvest_quantity, Harvest_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Harvest date: 2018-04-20                    <!--Harvest_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item>\n\n            <p>Notes</p>\n\n            <h2>Some text about something.</h2>                 <!--Harvest_notes-->\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\harvest-inner\harvest-inner.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], HarvestInnerPage);
 
 //# sourceMappingURL=harvest-inner.js.map
 
 /***/ }),
 
-/***/ 488:
+/***/ 489:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HivesPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__hive_create_hive_create__ = __webpack_require__(490);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hive_inner_hive_inner__ = __webpack_require__(214);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var HivesPage = (function () {
+    function HivesPage(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    HivesPage.prototype.openHivePage = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__hive_create_hive_create__["a" /* HiveCreate */]);
+    };
+    HivesPage.prototype.openHiveInner = function () {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__hive_inner_hive_inner__["a" /* HiveInner */]);
+    };
+    return HivesPage;
+}());
+HivesPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
+        selector: 'page-hives',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\hives\hives.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Hives</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Avilys</h2>                                  <!--Avilio pavadinimas Hive_name-->\n\n            <p>Hive active</p>\n\n            <!--Avilio statusas Hive_status\n\n                1 => "Hive active"\n\n                0 => "Hive inactive"\n\n            -->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Too high temperature.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>90% strength</div>                     <!--Naujausias �ra�as Bee_strength-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>40&deg;C</div>                         <!--Naujausias �ra�as Monitoring_temperature-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20                                  <!--Paskutin�s (naujausios) darytos ap�i�ros data Inspection_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openHiveInner()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/hive-img.jpg">\n\n            </ion-avatar>\n\n            <h2>#2 Avilys</h2>\n\n            <p>Hive inactive</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Everything is fine!</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-pulse"></ion-icon>\n\n                    <div>80% strength</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="ios-thermometer"></ion-icon>\n\n                    <div>32&deg;C</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openHivePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\hives\hives.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
+], HivesPage);
+
+//# sourceMappingURL=hives.js.map
+
+/***/ }),
+
+/***/ 490:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HiveCreate; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var HiveCreate = (function () {
+    function HiveCreate(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    HiveCreate.prototype.goBack = function () {
+        this.navCtrl.pop();
+    };
+    return HiveCreate;
+}());
+HiveCreate = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
+        selector: 'hive-create',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\hive-create\hive-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Hives\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Hive</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Hive Number</ion-label>      <!--Hive_name-->\n\n            <ion-input placeholder="Enter hive number"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Hive type</ion-label>             <!--Hive_type-->\n\n            <ion-select [(ngModel)]="hive-type" interface="action-sheet" placeholder="Select hive type">\n\n                <ion-option value="vertical">Vertical</ion-option>\n\n                <ion-option value="horizontal">Horizontal</ion-option>\n\n                <ion-option value="nucleus">Nucleus</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Hive status</ion-label>             <!--Hive_status-->\n\n            <ion-select [(ngModel)]="hive-status" interface="action-sheet" placeholder="Select hive status">\n\n                <ion-option value="active">Active</ion-option>\n\n                <ion-option value="inactive">Inactive</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <h1>Bee family info:</h1>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee family</ion-label>             <!--Hive_family-->\n\n            <ion-select [(ngModel)]="bee-family" interface="action-sheet" placeholder="Select bee family">\n\n                <ion-option value="buckfast">Buckfast</ion-option>\n\n                <ion-option value="carnica">Carnica</ion-option>\n\n                <ion-option value="other">Other</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Bee family origin</ion-label>             <!--Hive_family_origin-->\n\n            <ion-select [(ngModel)]="bee-family-origin" interface="action-sheet" placeholder="Select bee family origin">\n\n                <ion-option value="purchase">Purchase</ion-option>\n\n                <ion-option value="swarming">Natural swarming</ion-option>\n\n                <ion-option value="loss">Loss</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-row>\n\n            <ion-col padding width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline click="goBack()">Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col padding width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\hive-create\hive-create.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]])
+], HiveCreate);
+
+//# sourceMappingURL=hive-create.js.map
+
+/***/ }),
+
+/***/ 491:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreatmentPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__treatment_create_treatment_create__ = __webpack_require__(489);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__treatment_inner_treatment_inner__ = __webpack_require__(490);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__treatment_create_treatment_create__ = __webpack_require__(492);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__treatment_inner_treatment_inner__ = __webpack_require__(493);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -785,22 +933,22 @@ var TreatmentPage = (function () {
 }());
 TreatmentPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-treatment',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\treatment\treatment.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Treatments</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>                       <!--Treatment_name-->\n\n            <p>Product name used for treatment.</p>     <!--Treatment_product-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>                          <!--Treatment_disease-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>      <!--Treatement_quantity, Treatment_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20          <!--Treatment_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n                <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openTreatmentCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\treatment\treatment.html"*/
+        selector: 'page-treatment',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\treatment\treatment.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Treatments</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>                       <!--Treatment_name-->\n\n            <p>Product name used for treatment.</p>     <!--Treatment_product-->\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>                          <!--Treatment_disease-->\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>      <!--Treatement_quantity, Treatment_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20          <!--Treatment_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n            <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-card (click)="openTreatmentInnerPage()">\n\n        <ion-item>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>\n\n            <p>Product name used for treatment.</p>\n\n        </ion-item>\n\n        <ion-card-content>\n\n                <p>Some notes.</p>\n\n        </ion-card-content>\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-medkit"></ion-icon>\n\n                    <div>10 stripes per hive</div>\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-card>\n\n\n\n    <ion-fab right bottom>\n\n        <button ion-fab color="primary" (click)="openTreatmentCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\treatment\treatment.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], TreatmentPage);
 
 //# sourceMappingURL=treatment.js.map
 
 /***/ }),
 
-/***/ 489:
+/***/ 492:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreatmentCreatePage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -830,22 +978,22 @@ var TreatmentCreatePage = (function () {
 }());
 TreatmentCreatePage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-treatment-create',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\treatment-create\treatment-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Treatments\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Treatment</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>         <!--Treatment_date-->\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Disease</ion-label>      <!--Treatment_disease-->\n\n            <ion-input placeholder="Select disease type"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Product</ion-label>      <!--Treatment_product-->\n\n            <ion-input placeholder="Enter product name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Quantity</ion-label>     <!--Treatment_quantity-->\n\n            <ion-input placeholder="Enter quantity"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Unit</ion-label>         <!--Treatment_unit-->\n\n            <ion-select [(ngModel)]="treatment-unit" interface="action-sheet" placeholder="Select unit">\n\n                <ion-option value="g">Grams</ion-option>\n\n                <ion-option value="ml">Milliliters</ion-option>\n\n                <ion-option value="s">Stripes</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\treatment-create\treatment-create.html"*/
+        selector: 'page-treatment-create',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\treatment-create\treatment-create.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <ion-title>\n\n            Treatments\n\n        </ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-item>\n\n        <h1>Add New Treatment</h1>\n\n        <h2>Please, enter the following information:</h2>\n\n    </ion-item>\n\n\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Date</ion-label>         <!--Treatment_date-->\n\n            <ion-input placeholder="Enter date"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Disease</ion-label>      <!--Treatment_disease-->\n\n            <ion-input placeholder="Select disease type"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Product</ion-label>      <!--Treatment_product-->\n\n            <ion-input placeholder="Enter product name"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Quantity</ion-label>     <!--Treatment_quantity-->\n\n            <ion-input placeholder="Enter quantity"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label stacked color="primary">Unit</ion-label>         <!--Treatment_unit-->\n\n            <ion-select [(ngModel)]="treatment-unit" interface="action-sheet" placeholder="Select unit">\n\n                <ion-option value="g">Grams</ion-option>\n\n                <ion-option value="ml">Milliliters</ion-option>\n\n                <ion-option value="s">Stripes</ion-option>\n\n            </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-row padding>\n\n            <ion-col width-33>\n\n                <ion-buttons start>\n\n                    <button ion-button outline>Cancel</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n            <ion-col width-67>\n\n                <ion-buttons end>\n\n                    <button ion-button block>Save</button>\n\n                </ion-buttons>\n\n            </ion-col>\n\n        </ion-row>\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\treatment-create\treatment-create.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], TreatmentCreatePage);
 
 //# sourceMappingURL=treatment-create.js.map
 
 /***/ }),
 
-/***/ 490:
+/***/ 493:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TreatmentInnerPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -875,22 +1023,22 @@ var TreatmentInnerPage = (function () {
 }());
 TreatmentInnerPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-treatment-inner',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\treatment-inner\treatment-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Treatment Inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Treatment</h1>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>                       <!--Treatment_name-->\n\n            <p>Product name used for treatment.</p>     <!--Treatment_product-->\n\n        </ion-item>\n\n\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-color-filter"></ion-icon>\n\n                    <div>10 stripes</div>               <!--Treatement_quantity, Treatment_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20          <!--Treatment_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item>\n\n            <p>Notes</p>\n\n            <h2>Some text about something.</h2>         <!--Treatment_disease-->\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\treatment-inner\treatment-inner.html"*/
+        selector: 'page-treatment-inner',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\treatment-inner\treatment-inner.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n        <ion-title>Treatment Inner</ion-title>\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-list>\n\n        <ion-row style="height: 1rem"></ion-row>\n\n\n\n        <ion-item no-lines>\n\n            <h1>Treatment</h1>\n\n        </ion-item>\n\n\n\n        <ion-item no-lines>\n\n            <ion-avatar item-left>\n\n                <img src="./assets/img/medicine.jpg">\n\n            </ion-avatar>\n\n            <h2>#1 Treatment</h2>                       <!--Treatment_name-->\n\n            <p>Product name used for treatment.</p>     <!--Treatment_product-->\n\n        </ion-item>\n\n\n\n        <ion-row>\n\n            <ion-col>\n\n                <button ion-button icon-left clear small>\n\n                    <ion-icon name="md-color-filter"></ion-icon>\n\n                    <div>10 stripes</div>               <!--Treatement_quantity, Treatment_unit-->\n\n                </button>\n\n            </ion-col>\n\n            <ion-col center text-center>\n\n                <ion-note>\n\n                    Treatment date: 2018-04-20          <!--Treatment_date-->\n\n                </ion-note>\n\n            </ion-col>\n\n        </ion-row>\n\n\n\n        <ion-item>\n\n            <p>Notes</p>\n\n            <h2>Some text about something.</h2>         <!--Treatment_disease-->\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\treatment-inner\treatment-inner.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], TreatmentInnerPage);
 
 //# sourceMappingURL=treatment-inner.js.map
 
 /***/ }),
 
-/***/ 491:
+/***/ 494:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(492);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(590);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(495);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(593);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -898,34 +1046,38 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 590:
+/***/ 593:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_component__ = __webpack_require__(633);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_apiaries_apiaries__ = __webpack_require__(476);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_apiary_create_apiary_create__ = __webpack_require__(477);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_apiary_inner_apiary_inner__ = __webpack_require__(478);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_feeding_feeding__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_feeding_create_feeding_create__ = __webpack_require__(481);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feeding_inner_feeding_inner__ = __webpack_require__(482);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_harvest_harvest__ = __webpack_require__(485);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_harvest_create_harvest_create__ = __webpack_require__(486);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_harvest_inner_harvest_inner__ = __webpack_require__(487);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_hives_hives__ = __webpack_require__(483);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_hive_create_hive_create__ = __webpack_require__(484);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_hive_inner_hive_inner__ = __webpack_require__(210);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_home_home__ = __webpack_require__(475);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_inspect_inner_inspect_inner__ = __webpack_require__(479);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_inspect_create_inspect_create__ = __webpack_require__(480);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_tabs_tabs__ = __webpack_require__(474);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_stats_stats__ = __webpack_require__(637);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_treatment_treatment__ = __webpack_require__(488);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_treatment_inner_treatment_inner__ = __webpack_require__(490);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_treatment_create_treatment_create__ = __webpack_require__(489);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_component__ = __webpack_require__(635);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__ = __webpack_require__(60);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_http__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_apiaries_apiaries__ = __webpack_require__(479);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_apiary_create_apiary_create__ = __webpack_require__(480);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_apiary_inner_apiary_inner__ = __webpack_require__(481);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_feeding_feeding__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_feeding_create_feeding_create__ = __webpack_require__(484);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_feeding_inner_feeding_inner__ = __webpack_require__(485);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_harvest_harvest__ = __webpack_require__(486);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_harvest_create_harvest_create__ = __webpack_require__(487);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_harvest_inner_harvest_inner__ = __webpack_require__(488);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_hives_hives__ = __webpack_require__(489);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_hive_create_hive_create__ = __webpack_require__(490);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_hive_inner_hive_inner__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_home_home__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_login_login__ = __webpack_require__(212);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_register_register__ = __webpack_require__(478);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_inspect_inner_inspect_inner__ = __webpack_require__(482);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_inspect_create_inspect_create__ = __webpack_require__(483);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_tabs_tabs__ = __webpack_require__(640);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_stats_stats__ = __webpack_require__(641);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_treatment_treatment__ = __webpack_require__(491);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__pages_treatment_inner_treatment_inner__ = __webpack_require__(493);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_treatment_create_treatment_create__ = __webpack_require__(492);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -935,7 +1087,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
 //Pages import
+
+
 
 
 
@@ -965,28 +1121,32 @@ AppModule = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Q" /* NgModule */])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_feeding_feeding__["a" /* FeedingPage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_feeding_create_feeding_create__["a" /* FeedingCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_feeding_inner_feeding_inner__["a" /* FeedingInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_hives_hives__["a" /* HivesPage */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_18__pages_tabs_tabs__["a" /* TabsPage */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_harvest_harvest__["a" /* HarvestPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_harvest_create_harvest_create__["a" /* HarvestCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_harvest_inner_harvest_inner__["a" /* HarvestInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_hive_create_hive_create__["a" /* HiveCreate */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_hive_inner_hive_inner__["a" /* HiveInner */],
-            __WEBPACK_IMPORTED_MODULE_16__pages_inspect_inner_inspect_inner__["a" /* InspectInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_17__pages_inspect_create_inspect_create__["a" /* InspectCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_3__pages_apiaries_apiaries__["a" /* ApiariesPage */],
-            __WEBPACK_IMPORTED_MODULE_4__pages_apiary_create_apiary_create__["a" /* ApiaryCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_apiary_inner_apiary_inner__["a" /* ApiaryInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_19__pages_stats_stats__["a" /* StatsPage */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_treatment_treatment__["a" /* TreatmentPage */],
-            __WEBPACK_IMPORTED_MODULE_21__pages_treatment_inner_treatment_inner__["a" /* TreatmentInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_22__pages_treatment_create_treatment_create__["a" /* TreatmentCreatePage */]
+            __WEBPACK_IMPORTED_MODULE_8__pages_feeding_feeding__["a" /* FeedingPage */],
+            __WEBPACK_IMPORTED_MODULE_9__pages_feeding_create_feeding_create__["a" /* FeedingCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_feeding_inner_feeding_inner__["a" /* FeedingInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_hives_hives__["a" /* HivesPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_18__pages_login_login__["a" /* LoginPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_register_register__["a" /* RegisterPage */],
+            __WEBPACK_IMPORTED_MODULE_22__pages_tabs_tabs__["a" /* TabsPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_harvest_harvest__["a" /* HarvestPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_harvest_create_harvest_create__["a" /* HarvestCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_harvest_inner_harvest_inner__["a" /* HarvestInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_hive_create_hive_create__["a" /* HiveCreate */],
+            __WEBPACK_IMPORTED_MODULE_16__pages_hive_inner_hive_inner__["a" /* HiveInner */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_inspect_inner_inspect_inner__["a" /* InspectInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_21__pages_inspect_create_inspect_create__["a" /* InspectCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_5__pages_apiaries_apiaries__["a" /* ApiariesPage */],
+            __WEBPACK_IMPORTED_MODULE_6__pages_apiary_create_apiary_create__["a" /* ApiaryCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_apiary_inner_apiary_inner__["a" /* ApiaryInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_23__pages_stats_stats__["a" /* StatsPage */],
+            __WEBPACK_IMPORTED_MODULE_24__pages_treatment_treatment__["a" /* TreatmentPage */],
+            __WEBPACK_IMPORTED_MODULE_25__pages_treatment_inner_treatment_inner__["a" /* TreatmentInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_26__pages_treatment_create_treatment_create__["a" /* TreatmentCreatePage */]
         ],
         imports: [
+            __WEBPACK_IMPORTED_MODULE_3__angular_platform_browser__["a" /* BrowserModule */],
+            __WEBPACK_IMPORTED_MODULE_4__angular_http__["c" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["c" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* MyApp */], {}, {
                 links: []
             })
@@ -994,28 +1154,32 @@ AppModule = __decorate([
         bootstrap: [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* IonicApp */]],
         entryComponents: [
             __WEBPACK_IMPORTED_MODULE_2__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_feeding_feeding__["a" /* FeedingPage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_feeding_create_feeding_create__["a" /* FeedingCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_8__pages_feeding_inner_feeding_inner__["a" /* FeedingInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_12__pages_hives_hives__["a" /* HivesPage */],
-            __WEBPACK_IMPORTED_MODULE_15__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_18__pages_tabs_tabs__["a" /* TabsPage */],
-            __WEBPACK_IMPORTED_MODULE_9__pages_harvest_harvest__["a" /* HarvestPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_harvest_create_harvest_create__["a" /* HarvestCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_11__pages_harvest_inner_harvest_inner__["a" /* HarvestInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_13__pages_hive_create_hive_create__["a" /* HiveCreate */],
-            __WEBPACK_IMPORTED_MODULE_14__pages_hive_inner_hive_inner__["a" /* HiveInner */],
-            __WEBPACK_IMPORTED_MODULE_16__pages_inspect_inner_inspect_inner__["a" /* InspectInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_17__pages_inspect_create_inspect_create__["a" /* InspectCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_3__pages_apiaries_apiaries__["a" /* ApiariesPage */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_apiary_inner_apiary_inner__["a" /* ApiaryInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_4__pages_apiary_create_apiary_create__["a" /* ApiaryCreatePage */],
-            __WEBPACK_IMPORTED_MODULE_19__pages_stats_stats__["a" /* StatsPage */],
-            __WEBPACK_IMPORTED_MODULE_20__pages_treatment_treatment__["a" /* TreatmentPage */],
-            __WEBPACK_IMPORTED_MODULE_21__pages_treatment_inner_treatment_inner__["a" /* TreatmentInnerPage */],
-            __WEBPACK_IMPORTED_MODULE_22__pages_treatment_create_treatment_create__["a" /* TreatmentCreatePage */]
+            __WEBPACK_IMPORTED_MODULE_8__pages_feeding_feeding__["a" /* FeedingPage */],
+            __WEBPACK_IMPORTED_MODULE_9__pages_feeding_create_feeding_create__["a" /* FeedingCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_10__pages_feeding_inner_feeding_inner__["a" /* FeedingInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_14__pages_hives_hives__["a" /* HivesPage */],
+            __WEBPACK_IMPORTED_MODULE_17__pages_home_home__["a" /* HomePage */],
+            __WEBPACK_IMPORTED_MODULE_18__pages_login_login__["a" /* LoginPage */],
+            __WEBPACK_IMPORTED_MODULE_19__pages_register_register__["a" /* RegisterPage */],
+            __WEBPACK_IMPORTED_MODULE_22__pages_tabs_tabs__["a" /* TabsPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_harvest_harvest__["a" /* HarvestPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_harvest_create_harvest_create__["a" /* HarvestCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_13__pages_harvest_inner_harvest_inner__["a" /* HarvestInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_15__pages_hive_create_hive_create__["a" /* HiveCreate */],
+            __WEBPACK_IMPORTED_MODULE_16__pages_hive_inner_hive_inner__["a" /* HiveInner */],
+            __WEBPACK_IMPORTED_MODULE_20__pages_inspect_inner_inspect_inner__["a" /* InspectInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_21__pages_inspect_create_inspect_create__["a" /* InspectCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_5__pages_apiaries_apiaries__["a" /* ApiariesPage */],
+            __WEBPACK_IMPORTED_MODULE_7__pages_apiary_inner_apiary_inner__["a" /* ApiaryInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_6__pages_apiary_create_apiary_create__["a" /* ApiaryCreatePage */],
+            __WEBPACK_IMPORTED_MODULE_23__pages_stats_stats__["a" /* StatsPage */],
+            __WEBPACK_IMPORTED_MODULE_24__pages_treatment_treatment__["a" /* TreatmentPage */],
+            __WEBPACK_IMPORTED_MODULE_25__pages_treatment_inner_treatment_inner__["a" /* TreatmentInnerPage */],
+            __WEBPACK_IMPORTED_MODULE_26__pages_treatment_create_treatment_create__["a" /* TreatmentCreatePage */]
         ],
-        providers: [{ provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* IonicErrorHandler */] }]
+        providers: [
+            { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["C" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* IonicErrorHandler */] }
+        ]
     })
 ], AppModule);
 
@@ -1023,15 +1187,15 @@ AppModule = __decorate([
 
 /***/ }),
 
-/***/ 633:
+/***/ 635:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_native__ = __webpack_require__(634);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_tabs_tabs__ = __webpack_require__(474);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_native__ = __webpack_require__(636);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_login_login__ = __webpack_require__(212);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1047,7 +1211,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var MyApp = (function () {
     function MyApp(platform) {
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_3__pages_tabs_tabs__["a" /* TabsPage */];
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_3__pages_login_login__["a" /* LoginPage */];
         platform.ready().then(function () {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
@@ -1058,22 +1222,86 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\app\app.html"*/'<ion-menu [content]="content">\n\n    <ion-header>\n\n        <ion-toolbar color="primary">\n\n            <ion-title>Menu</ion-title>\n\n        </ion-toolbar>\n\n    </ion-header>\n\n    <ion-content>\n\n        <ion-list>\n\n\n\n            <ion-item no-lines>\n\n                Your workplace:\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label>Choose apiary</ion-label>\n\n                <ion-select [(ngModel)]="apiaries" interface="action-sheet">\n\n                    <ion-option value="first">#1 Apiary</ion-option>\n\n                    <ion-option value="second">#2 Apiary</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                Profile\n\n            </ion-item>\n\n            <ion-item>\n\n                Info\n\n            </ion-item>\n\n            <ion-item>\n\n                Logout\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n    </ion-content>\n\n</ion-menu>\n\n\n\n<ion-nav #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\app\app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\app\app.html"*/'<ion-menu [content]="content">\n\n    <ion-header>\n\n        <ion-toolbar color="primary">\n\n            <ion-title>Menu</ion-title>\n\n        </ion-toolbar>\n\n    </ion-header>\n\n    <ion-content>\n\n        <ion-list>\n\n\n\n            <ion-item no-lines>\n\n                Your workplace:\n\n            </ion-item>\n\n            <ion-item>\n\n                <ion-label>Choose apiary</ion-label>\n\n                <ion-select [(ngModel)]="apiaries" interface="action-sheet">\n\n                    <ion-option value="first">#1 Apiary</ion-option>\n\n                    <ion-option value="second">#2 Apiary</ion-option>\n\n                </ion-select>\n\n            </ion-item>\n\n            <ion-item>\n\n                Profile\n\n            </ion-item>\n\n            <ion-item>\n\n                Info\n\n            </ion-item>\n\n            <ion-item>\n\n                Logout\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n    </ion-content>\n\n</ion-menu>\n\n\n\n<ion-nav #content [root]="rootPage"></ion-nav>'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* Platform */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
 
-/***/ 637:
+/***/ 640:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(213);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__hives_hives__ = __webpack_require__(489);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__harvest_harvest__ = __webpack_require__(486);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__treatment_treatment__ = __webpack_require__(491);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__feeding_feeding__ = __webpack_require__(215);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login__ = __webpack_require__(212);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var TabsPage = (function () {
+    function TabsPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        // this tells the tabs component which Pages
+        // should be each tab's root Page
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_3__hives_hives__["a" /* HivesPage */];
+        this.tab3Root = __WEBPACK_IMPORTED_MODULE_5__treatment_treatment__["a" /* TreatmentPage */];
+        this.tab4Root = __WEBPACK_IMPORTED_MODULE_4__harvest_harvest__["a" /* HarvestPage */];
+        this.tab5Root = __WEBPACK_IMPORTED_MODULE_6__feeding_feeding__["a" /* FeedingPage */];
+        this.token = {
+            access_token: ''
+        };
+        if (navParams.get('access_token')) {
+            this.token.access_token = navParams.get('access_token');
+        }
+        else {
+            this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_7__login_login__["a" /* LoginPage */]);
+        }
+    }
+    return TabsPage;
+}());
+TabsPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n    <ion-tab [root]="tab1Root" [rootParams]="token" tabTitle="Home" tabIcon="ios-home-outline"></ion-tab>\n\n    <ion-tab [root]="tab2Root" [rootParams]="token" tabTitle="Hives" tabIcon="ios-browsers-outline"></ion-tab>\n\n    <ion-tab [root]="tab3Root" [rootParams]="token" tabTitle="Treatments" tabIcon="ios-medkit-outline"></ion-tab>\n\n    <ion-tab [root]="tab4Root" [rootParams]="token" tabTitle="Harvest" tabIcon="ios-color-fill-outline"></ion-tab>\n\n    <ion-tab [root]="tab5Root" [rootParams]="token" tabTitle="Feedings" tabIcon="ios-restaurant-outline"></ion-tab>\n\n\n\n</ion-tabs>'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\tabs\tabs.html"*/
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]) === "function" && _b || Object])
+], TabsPage);
+
+var _a, _b;
+//# sourceMappingURL=tabs.js.map
+
+/***/ }),
+
+/***/ 641:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StatsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(10);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1103,14 +1331,14 @@ var StatsPage = (function () {
 }());
 StatsPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Component */])({
-        selector: 'page-stats',template:/*ion-inline-start:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\stats\stats.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Stats</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n    <p>Statis Page</p>\n</ion-content>\n'/*ion-inline-end:"C:\Users\Gytis\source\repos\BeeApp_FRONT-END\BeeApp\BeeApp\src\pages\stats\stats.html"*/
+        selector: 'page-stats',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\stats\stats.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <button ion-button menuToggle icon-only>\n\n            <ion-icon name=\'ios-menu-outline\'></ion-icon>\n\n        </button>\n\n\n\n        <ion-title>Stats</ion-title>\n\n\n\n        <ion-buttons end>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-search-outline"></ion-icon>\n\n            </button>\n\n            <button ion-button icon-only>\n\n                <ion-icon name="ios-more-outline"></ion-icon>\n\n            </button>\n\n        </ion-buttons>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <p>Statis Page</p>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\stats\stats.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavParams */]])
 ], StatsPage);
 
 //# sourceMappingURL=stats.js.map
 
 /***/ })
 
-},[491]);
+},[494]);
 //# sourceMappingURL=main.js.map

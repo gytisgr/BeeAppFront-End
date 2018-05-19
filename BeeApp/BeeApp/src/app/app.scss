@@ -134,7 +134,46 @@ body {
     height: 100px;
 }
 
+.toast-warning {
+    .toast-container {
+        .toast-message {
+            color: #8a6d3b !important;
+        }
 
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+}
 
+.toast-success {
+    .toast-container {
+        .toast-message {
+            color: #3c763d !important;
+        }
 
+        background-color: #dff0d8 !important;
+        border-color: #d6e9c6 !important;
+    }
+}
 
+.toast-info {
+    .toast-container {
+        .toast-message {
+            color: #31708f !important;
+        }
+
+        background-color: #d9edf7 !important;
+        border-color: #bce8f1 !important;
+    }
+}
+
+.toast-danger {
+    .toast-container {
+        .toast-message {
+            color: #a94442 !important;
+        }
+
+        background-color: #f2dede !important;
+        border-color: #ebccd1 !important;
+    }
+}

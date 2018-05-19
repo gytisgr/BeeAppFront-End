@@ -1,6 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
 
 //Pages import
 import { ApiariesPage } from '../pages/apiaries/apiaries';
@@ -16,6 +18,8 @@ import { HivesPage } from '../pages/hives/hives';
 import { HiveCreate } from '../pages/hive-create/hive-create';
 import { HiveInner } from '../pages/hive-inner/hive-inner';
 import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 import { InspectInnerPage } from '../pages/inspect-inner/inspect-inner';
 import { InspectCreatePage } from '../pages/inspect-create/inspect-create';
 import { TabsPage } from '../pages/tabs/tabs';
@@ -27,56 +31,64 @@ import { TreatmentCreatePage } from '../pages/treatment-create/treatment-create'
 
 
 @NgModule({
-  declarations: [
-    MyApp,
-    FeedingPage,
-    FeedingCreatePage,
-    FeedingInnerPage,
-    HivesPage,
-    HomePage,
-    TabsPage,
-    HarvestPage,
-    HarvestCreatePage,
-    HarvestInnerPage,
-    HiveCreate,
-    HiveInner,
-    InspectInnerPage,
-    InspectCreatePage,
-    ApiariesPage,
-    ApiaryCreatePage,
-    ApiaryInnerPage,
-    StatsPage,
-    TreatmentPage,
-    TreatmentInnerPage,
-    TreatmentCreatePage
-  ],
-  imports: [
-      IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    FeedingPage,
-    FeedingCreatePage,
-    FeedingInnerPage,
-    HivesPage,
-    HomePage,
-    TabsPage,
-    HarvestPage,
-    HarvestCreatePage,
-    HarvestInnerPage,
-    HiveCreate,
-    HiveInner,
-    InspectInnerPage,
-    InspectCreatePage,
-    ApiariesPage,
-    ApiaryInnerPage,
-    ApiaryCreatePage,
-    StatsPage,
-    TreatmentPage,
-    TreatmentInnerPage,
-    TreatmentCreatePage
-  ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+    declarations: [
+        MyApp,
+        FeedingPage,
+        FeedingCreatePage,
+        FeedingInnerPage,
+        HivesPage,
+        HomePage,
+        LoginPage,
+        RegisterPage,
+        TabsPage,
+        HarvestPage,
+        HarvestCreatePage,
+        HarvestInnerPage,
+        HiveCreate,
+        HiveInner,
+        InspectInnerPage,
+        InspectCreatePage,
+        ApiariesPage,
+        ApiaryCreatePage,
+        ApiaryInnerPage,
+        StatsPage,
+        TreatmentPage,
+        TreatmentInnerPage,
+        TreatmentCreatePage
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        IonicModule.forRoot(MyApp)
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        FeedingPage,
+        FeedingCreatePage,
+        FeedingInnerPage,
+        HivesPage,
+        HomePage,
+        LoginPage,
+        RegisterPage,
+        TabsPage,
+        HarvestPage,
+        HarvestCreatePage,
+        HarvestInnerPage,
+        HiveCreate,
+        HiveInner,
+        InspectInnerPage,
+        InspectCreatePage,
+        ApiariesPage,
+        ApiaryInnerPage,
+        ApiaryCreatePage,
+        StatsPage,
+        TreatmentPage,
+        TreatmentInnerPage,
+        TreatmentCreatePage
+    ],
+    providers: [
+        { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ]
 })
-export class AppModule {}
+export class AppModule { }
