@@ -1,29 +1,29 @@
 <ion-header>
 
     <ion-navbar color="primary">
-            <button ion-button menuToggle icon-only>
-                <ion-icon name='ios-menu-outline'></ion-icon>
+        <button ion-button menuToggle icon-only>
+            <ion-icon name='ios-menu-outline'></ion-icon>
+        </button>
+        <ion-title>Hive inner</ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only>
+                <ion-icon name="ios-more-outline"></ion-icon>
             </button>
-            <ion-title>Hive inner</ion-title>
-            <ion-buttons end>
-                <button ion-button icon-only>
-                    <ion-icon name="ios-more-outline"></ion-icon>
-                </button>
-            </ion-buttons>
+        </ion-buttons>
     </ion-navbar>
 
     <ion-toolbar>
-            <ion-segment [(ngModel)]="hive">
-                <ion-segment-button value="info">
-                    Hive Info
-                </ion-segment-button>
-                <ion-segment-button value="inspections">
-                    Inspections
-                </ion-segment-button>
-                <ion-segment-button value="stats">
-                    Statistics
-                </ion-segment-button>
-            </ion-segment>
+        <ion-segment [(ngModel)]="hiveTabs" (ionChange)="selectedTabChanged(hiveTabs)">
+            <ion-segment-button value="info">
+                Hive Info
+            </ion-segment-button>
+            <ion-segment-button value="inspections">
+                Inspections
+            </ion-segment-button>
+            <ion-segment-button value="stats">
+                Statistics
+            </ion-segment-button>
+        </ion-segment>
     </ion-toolbar>
 
 </ion-header>
@@ -34,145 +34,148 @@
 
 <ion-content>
 
-    <div [ngSwitch]="hive">
+    <div [ngSwitch]="hiveTabs">
         <ion-list *ngSwitchCase="'info'">
+            <div *ngIf="hive.queen">
 
-            <ion-row style="height: 1rem"></ion-row>
+                <ion-row style="height: 1rem"></ion-row>
 
-            <ion-item no-lines>
-                <h1>Hive</h1>
-            </ion-item>
+                <ion-item no-lines>
+                    <h1></h1>
+                </ion-item>
 
-            <ion-item no-lines>
-                <ion-avatar item-left>
-                    <img src="./assets/img/hive-img.jpg">
-                </ion-avatar>
-                <h2>#1 Hive</h2>                            <!--Avilio pavadinimas Hive_name-->
-                <p>Last inspection: 2018-04-20</p>          <!--Paskutinës (naujausios) darytos apþiûros data Inspection_date-->
-            </ion-item>
+                <ion-item no-lines>
+                    <ion-avatar item-left>
+                        <img src="./assets/img/hive-img.jpg">
+                    </ion-avatar>
+                    <h2>{{ hive?.name }}</h2>                            <!--Avilio pavadinimas Hive_name-->
+                    <p *ngFor="let inspection of (hive.inspections | slice: -1)">Last inspection: {{ inspection.date | date: 'yyyy-MM-dd' }}</p>          <!--Paskutinës (naujausios) darytos apþiûros data Inspection_date-->
+                </ion-item>
 
-            <ion-row>
-                <ion-col>
-                    <button ion-button icon-left clear small>
-                        <ion-icon name="ios-pulse"></ion-icon>
-                        <div>80% strengt</div>              <!--Naujausias áraðas Bee_strength-->
-                    </button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button icon-left clear small>
-                        <ion-icon name="ios-thermometer"></ion-icon>
-                        <div>32&deg;C TEMP</div>            <!--Naujausias áraðas Monitoring_temperature-->
-                    </button>
-                </ion-col>
-                <ion-col>
-                    <button ion-button icon-left clear small>
-                        <ion-icon name="ios-water"></ion-icon>
-                        <div>25%</div>                      <!--Naujausias áraðas Monitoring_humidity-->
-                    </button>
-                </ion-col>
-            </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button icon-left clear small>
+                            <ion-icon name="ios-pulse"></ion-icon>
+                            <div *ngFor="let inspection of (hive.inspections | slice: -1)">{{ inspection.strength }} strength</div>              <!--Naujausias áraðas Bee_strength-->
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button icon-left clear small>
+                            <ion-icon name="ios-thermometer"></ion-icon>
+                            <div>{{ hive?.monitoring.temperature }}&deg;C TEMP</div>            <!--Naujausias áraðas Monitoring_temperature-->
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button icon-left clear small>
+                            <ion-icon name="ios-water"></ion-icon>
+                            <div>{{ hive?.monitoring.humidity }}%</div>                      <!--Naujausias áraðas Monitoring_humidity-->
+                        </button>
+                    </ion-col>
+                </ion-row>
 
-            <ion-item>
-                <p>Status</p>
-                <h2>Active</h2>                             <!--Avilio statusas Hive_status
-                                                            1 => "Hive active"
-                                                            0 => "Hive inactive"-->
-            </ion-item>
-            <ion-item>
-                <p>Hive type</p>
-                <h2>Dadan hive</h2>                         <!--Avilio tipas Hive_type-->
-            </ion-item>
-            <ion-item>
-                <p>Bee Family</p>
-                <h2>Buckfast</h2>                           <!--Bièiø ðeimos veislë Hive_family-->
-            </ion-item>
+                <ion-item>
+                    <p>Status</p>
+                    <h2>{{ hive?.status ? 'Active':'Inactive'}}</h2>
+                    <!--Avilio statusas Hive_status
+        1 => "Hive active"
+        0 => "Hive inactive"-->
+                </ion-item>
+                <ion-item>
+                    <p>Hive type</p>
+                    <h2>{{ hive?.type }}</h2>                         <!--Avilio tipas Hive_type-->
+                </ion-item>
+                <ion-item>
+                    <p>Bee Family</p>
+                    <h2>{{ hive?.family }}</h2>                           <!--Bièiø ðeimos veislë Hive_family-->
+                </ion-item>
 
-            <ion-item no-lines>
-                <h1>Queen status</h1>
-            </ion-item>
+                <ion-item no-lines>
+                    <h1>Queen status</h1>
+                </ion-item>
 
-            <ion-item>
-                <p>Name</p>
-                <h2>#1 Queen</h2>                           <!--Motinëlës pavadinimas Queen_name-->
-            </ion-item>
-            <ion-item>
-                <p>Breed</p>
-                <h2>Carnica</h2>                            <!--Motinëlës veislë Queen_breed-->
-            </ion-item>
-            <ion-item>
-                <p>Date</p>
-                <h2>2018-04-10</h2>                         <!--Motinëlës talpinimo á avilá data Queen_date-->
-            </ion-item>
-            <ion-item>
-                <p>State</p>
-                <h2>Emerged</h2>                            <!--Queen_state-->
-            </ion-item>
-            <ion-item>
-                <p>Status</p>
-                <h2>Accepted</h2>                           <!--Queen_status-->
-            </ion-item>
-            <ion-item>
-                <p>Color</p>
-                <h2>Blue</h2>                               <!--Spalva pagal kurià sprendþiam amþiø Queen_colour-->
-            </ion-item>
+                <ion-item>
+                    <p>Name</p>
+                    <h2>{{ hive?.queen.name }}</h2>                           <!--Motinëlës pavadinimas Queen_name-->
+                </ion-item>
+                <ion-item>
+                    <p>Breed</p>
+                    <h2>{{ hive?.queen.breed }}</h2>                            <!--Motinëlës veislë Queen_breed-->
+                </ion-item>
+                <ion-item>
+                    <p>Date</p>
+                    <h2>{{ hive?.queen.date | date: 'yyyy-MM-dd' }}2018-04-10</h2>                         <!--Motinëlës talpinimo á avilá data Queen_date-->
+                </ion-item>
+                <ion-item>
+                    <p>State</p>
+                    <h2>{{ hive?.queen.state }}</h2>                            <!--Queen_state-->
+                </ion-item>
+                <ion-item>
+                    <p>Status</p>
+                    <h2>{{ hive?.queen.status }}</h2>                           <!--Queen_status-->
+                </ion-item>
+                <ion-item>
+                    <p>Color</p>
+                    <h2>{{ hive?.queen.colour }}</h2>                               <!--Spalva pagal kurià sprendþiam amþiø Queen_colour-->
+                </ion-item>
 
+            </div>
         </ion-list>
 
         <ion-list *ngSwitchCase="'inspections'">
 
-            <ion-card (click)="openInspectInnerPage()">
+            <ion-card (click)="openInspectInnerPage()" *ngFor="let inspection of hive.inspections">
                 <ion-item>
                     <ion-avatar item-left>
                         <img src="./assets/img/glass.jpg">
                     </ion-avatar>
-                    <h2>#1 Inspection</h2>                  <!--Inspection_name-->
-                    <p>Calm temper</p>                      <!--Bee_temper-->
+                    <h2>{{ inspection.name }}</h2>                  <!--Inspection_name-->
+                    <p>{{ inspection.temper }}</p>                      <!--Bee_temper-->
                 </ion-item>
                 <ion-card-content>
-                    <p>No disease.</p>                      <!--Disease-->
+                    <p>{{ inspection.disease }}</p>                      <!--Disease-->
                 </ion-card-content>
                 <ion-row>
                     <ion-col>
                         <button ion-button icon-left clear small>
                             <ion-icon name="ios-pulse"></ion-icon>
-                            <div>80% strength</div>         <!--Bee_strength-->
+                            <div>{{ inspection.strength }} strength</div>         <!--Bee_strength-->
                         </button>
                     </ion-col>
                     <ion-col center text-center>
                         <ion-note>
-                            Inspection date: 2018-04-20
+                            Inspection date: {{ inspection.date | date: 'yyyy-MM-dd' }}
                         </ion-note>
                     </ion-col>
 
                 </ion-row>
             </ion-card>
 
-            <ion-card (click)="openInspectInnerPage()">
+            <!--<ion-card (click)="openInspectInnerPage()">
                 <ion-item>
                     <ion-avatar item-left>
                         <img src="./assets/img/glass.jpg">
                     </ion-avatar>
-                    <h2>#1 Inspection</h2>                  <!--Inspection_name-->
-                    <p>Calm temper</p>                      <!--Bee_temper-->
+                    <h2>#1 Inspection</h2>                 
+                    <p>Calm temper</p>                      
                 </ion-item>
                 <ion-card-content>
-                    <p>No disease.</p>                      <!--Disease-->
+                    <p>No disease.</p>                     
                 </ion-card-content>
                 <ion-row>
                     <ion-col>
                         <button ion-button icon-left clear small>
                             <ion-icon name="ios-pulse"></ion-icon>
-                            <div>80% strength</div>         <!--Bee_strength-->
+                            <div>80% strength</div>        
                         </button>
                     </ion-col>
                     <ion-col center text-center>
                         <ion-note>
-                            Inspection date: 2018-04-20     <!--Inspection_date-->
+                            Inspection date: 2018-04-20     
                         </ion-note>
                     </ion-col>
 
                 </ion-row>
-            </ion-card>
+            </ion-card>-->
 
             <ion-fab right bottom>
                 <button ion-fab color="primary" (click)="openInspectCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>

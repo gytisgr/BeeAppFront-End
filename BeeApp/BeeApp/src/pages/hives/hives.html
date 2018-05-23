@@ -21,43 +21,43 @@
 
 <ion-content>
 
-    <ion-card (click)="openHiveInner()">
+    <ion-card (click)="openHiveInner(hive.id)" *ngFor="let hive of hives">
         <ion-item>
             <ion-avatar item-left>
                 <img src="./assets/img/hive-img.jpg">
             </ion-avatar>
-            <h2>#1 Avilys</h2>                                  <!--Avilio pavadinimas Hive_name-->
-            <p>Hive active</p>
+            <h2>{{ hive.name }}</h2>                                  <!--Avilio pavadinimas Hive_name-->
+            <p>Hive {{ hive.status ? 'active':'inactive'}}</p>
             <!--Avilio statusas Hive_status
                 1 => "Hive active"
                 0 => "Hive inactive"
             -->
         </ion-item>
         <ion-card-content>
-            <p>Too high temperature.</p>
+            <p>{{ hive.note != 'null' ? note: '' }}</p>
         </ion-card-content>
         <ion-row>
             <ion-col>
-                <button ion-button icon-left clear small>
+                <button ion-button icon-left clear small *ngFor="let inspection of (hive.inspections | slice: -1)">
                     <ion-icon name="ios-pulse"></ion-icon>
-                    <div>90% strength</div>                     <!--Naujausias áraðas Bee_strength-->
+                    <div>{{ inspection.strength }} strength</div>                     <!--Naujausias áraðas Bee_strength-->
                 </button>
             </ion-col>
             <ion-col>
                 <button ion-button icon-left clear small>
                     <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>40&deg;C</div>                         <!--Naujausias áraðas Monitoring_temperature-->
+                    <div>{{ hive.monitoring.temperature }}&deg;C</div>                         <!--Naujausias áraðas Monitoring_temperature-->
                 </button>
             </ion-col>
             <ion-col center text-center>
                 <ion-note>
-                    2018-04-20                                  <!--Paskutinës (naujausios) darytos apþiûros data Inspection_date-->
+                    {{ hive.date | date: 'yyyy-MM-dd' }}                                  <!--Paskutinës (naujausios) darytos apþiûros data Inspection_date-->
                 </ion-note>
             </ion-col>
         </ion-row>
     </ion-card>
 
-    <ion-card (click)="openHiveInner()">
+    <!--<ion-card (click)="openHiveInner()">
         <ion-item>
             <ion-avatar item-left>
                 <img src="./assets/img/hive-img.jpg">
@@ -279,7 +279,7 @@
                 </ion-note>
             </ion-col>
         </ion-row>
-    </ion-card>
+    </ion-card>-->
 
     <ion-fab right bottom>
         <button ion-fab color="primary" (click)="openHivePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>

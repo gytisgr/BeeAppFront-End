@@ -27,6 +27,12 @@ import { StatsPage } from '../pages/stats/stats';
 import { TreatmentPage } from '../pages/treatment/treatment';
 import { TreatmentInnerPage } from '../pages/treatment-inner/treatment-inner';
 import { TreatmentCreatePage } from '../pages/treatment-create/treatment-create';
+import { NativeStorage } from '@ionic-native/native-storage';
+
+// Services
+import { ApiaryService } from './service/apiaryService';
+import { AuthenticationService } from './service/authenticationService';
+import { HiveService } from './service/hiveService';
 
 
 
@@ -88,6 +94,10 @@ import { TreatmentCreatePage } from '../pages/treatment-create/treatment-create'
         TreatmentCreatePage
     ],
     providers: [
+        NativeStorage,
+        ApiaryService,
+        AuthenticationService,
+        HiveService,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })

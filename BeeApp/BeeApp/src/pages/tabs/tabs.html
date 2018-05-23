@@ -1,8 +1,43 @@
-<ion-tabs>
-    <ion-tab [root]="tab1Root" [rootParams]="token" tabTitle="Home" tabIcon="ios-home-outline"></ion-tab>
-    <ion-tab [root]="tab2Root" [rootParams]="token" tabTitle="Hives" tabIcon="ios-browsers-outline"></ion-tab>
-    <ion-tab [root]="tab3Root" [rootParams]="token" tabTitle="Treatments" tabIcon="ios-medkit-outline"></ion-tab>
-    <ion-tab [root]="tab4Root" [rootParams]="token" tabTitle="Harvest" tabIcon="ios-color-fill-outline"></ion-tab>
-    <ion-tab [root]="tab5Root" [rootParams]="token" tabTitle="Feedings" tabIcon="ios-restaurant-outline"></ion-tab>
+<ion-menu [content]="content">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Menu</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+
+            <ion-item no-lines>
+                Your workplace:
+            </ion-item>
+            <ion-item>
+                <ion-label>Choose apiary</ion-label>
+                <ion-select [(ngModel)]="apiary" (ionChange)="selectedApiary(apiary)" interface="action-sheet">
+                    <ion-option *ngFor="let apiary of apiaries" value="{{ apiary.id }}">{{ apiary.name }}</ion-option>
+                </ion-select>
+            </ion-item>
+            <ion-item>
+                Profile
+            </ion-item>
+            <ion-item>
+                Info
+            </ion-item>
+            <ion-item>
+                Logout
+            </ion-item>
+
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav #content [root]="rootPage"></ion-nav>
+
+
+<ion-tabs #tabs>
+    <ion-tab [root]="tab1Root" [rootParams]="{token: token}" tabTitle="Home" tabIcon="ios-home-outline"></ion-tab>
+    <ion-tab [root]="tab2Root" [rootParams]="{token: token}" tabTitle="Hives" tabIcon="ios-browsers-outline"></ion-tab>
+    <ion-tab [root]="tab3Root" [rootParams]="{token: token}" tabTitle="Treatments" tabIcon="ios-medkit-outline"></ion-tab>
+    <ion-tab [root]="tab4Root" [rootParams]="{token: token}" tabTitle="Harvest" tabIcon="ios-color-fill-outline"></ion-tab>
+    <ion-tab [root]="tab5Root" [rootParams]="{token: token}" tabTitle="Feedings" tabIcon="ios-restaurant-outline"></ion-tab>
 
 </ion-tabs>

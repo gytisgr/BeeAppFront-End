@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { ApiariesPage } from '../apiaries/apiaries';
 import { FeedingPage } from '../feeding/feeding';
+import { AuthenticationService } from "../../app/service/authenticationService";
 
 
 @Component({
@@ -13,8 +14,10 @@ export class HomePage {
 
     constructor(
         public navCtrl: NavController,
-        public navParams: NavParams) {
-        console.log(navParams.get('access_token'));
+        public navParams: NavParams,
+        public authService: AuthenticationService) {
+
+        console.log(this.authService.getToken());
   }
   
   onLink(url: string) {

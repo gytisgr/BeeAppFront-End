@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { ToastController } from 'ionic-angular';
+import { ToastController, Platform } from 'ionic-angular';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -9,6 +10,8 @@ import 'rxjs/add/operator/map';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { TabsPage } from '../tabs/tabs';
+import { AuthenticationService } from "../../app/service/authenticationService";
+
 
 @Component({
     selector: 'page-login',
@@ -24,10 +27,29 @@ export class LoginPage {
         public navParams: NavParams,
         public loadingCtrl: LoadingController,
         public toastCtrl: ToastController,
-        public http: Http) {
+        public http: Http,
+        public platform: Platform,
+        public nativeStorage: NativeStorage,
+        public authService: AuthenticationService) {
+
+        this.username = 'k.jankauskas@hotmail.com';
+        this.password = 'testtesttest';
+        this.processlogin();
 
         if (navParams.get('email')) {
             this.username = navParams.get('email');
+        }
+
+        if (this.platform.is('cordova')) {
+
+            this.nativeStorage.getItem('credentials').then(
+                data => {
+                    if (data) {
+                        this.username = data.username;
+                        this.password = data.password;
+                    }
+                    console.log(data);
+                });
         }
     }
 
@@ -36,6 +58,10 @@ export class LoginPage {
     }
 
     processlogin() {
+        if (this.platform.is('cordova')) {
+            this.nativeStorage.setItem('credentials', { property: this.username, anotherProperty: this.password });
+        }
+
         let loader = this.loadingCtrl.create({
             spinner: 'crescent',
             content: "Please wait...",
@@ -47,8 +73,6 @@ export class LoginPage {
         body.set('password', this.password);
         body.set('grant_type', 'password');
 
-        console.log(body.toString());
-
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -56,7 +80,8 @@ export class LoginPage {
             data => {
                 if (data) {
                     loader.dismiss();
-                    this.navCtrl.setRoot(TabsPage, { access_token: data.access_token });
+                    this.authService.setToken(data.access_token);
+                    this.navCtrl.setRoot(TabsPage);
                 }
             },
             error => {
