@@ -21,61 +21,42 @@
 
 <ion-content>
 
-    <ion-card (click)="openApiaryInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/apiary.jpg">
-            </ion-avatar>
-            <h2>#1 Apiary</h2>      <!--Apiary_name-->
-            <p>Vilnius, Lietuva</p> <!--Apiary_place-->
-        </ion-item>
-        <ion-card-content>
-            <p>45 active and 5 not active hives in apiary.</p>  <!--Atvaizduoja kiek bityne ið viso aktyviø ir neaktyviø aviliø pagal Hive_status atributà-->
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength AVG</div>                 <!--Vidutinis stiprumas bityne pagal atributà Bee_strength-->
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>                         <!--Vidutinë temperatûra bityne pagal atributà Monitoring_temperature-->
-                </button>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    <div *ngIf="apiaries.length == 0">
+        <ion-card padding>
+            There are no apiaries created.
+        </ion-card>
+    </div>
 
-    <ion-card (click)="openApiaryInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/apiary.jpg">
-            </ion-avatar>
-            <h2>#2 Apiary</h2>
-            <p>Vilnius, Lietuva</p>
-        </ion-item>
-        <ion-card-content>
-            <p>26 active and 2 not active hives in apiary.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength AVG</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    <div *ngIf="apiaries">
+        <ion-card (click)="openApiaryInnerPage(apiary.id)" *ngFor="let apiary of apiaries;">
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="./assets/img/apiary.jpg">
+                </ion-avatar>
+                <h2>{{ apiary.name }}</h2>      <!--Apiary_name-->
+                <p>{{ apiary.place }}</p> <!--Apiary_place-->
+            </ion-item>
+            <ion-card-content>
+                <p>45 active and 5 not active hives in apiary.</p>  <!--Atvaizduoja kiek bityne ið viso aktyviø ir neaktyviø aviliø pagal Hive_status atributà-->
+            </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="ios-pulse"></ion-icon>
+                        <div>80% strength AVG</div>                 <!--Vidutinis stiprumas bityne pagal atributà Bee_strength-->
+                    </button>
+                </ion-col>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="ios-thermometer"></ion-icon>
+                        <div>32&deg;C</div>                         <!--Vidutinë temperatûra bityne pagal atributà Monitoring_temperature-->
+                    </button>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </div>
 
-    <ion-fab right bottom>
+    <ion-fab right bottom style="z-index:100;position:fixed;right:20px;bottom:65px;">
         <button ion-fab color="primary" (click)="openApiaryCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>
     </ion-fab>
 

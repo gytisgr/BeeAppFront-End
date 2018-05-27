@@ -17,7 +17,7 @@ export class RegisterPage {
         firstName: '',
         lastName: '',
         email: '',
-        phone: '',
+        phoneNumber: '',
         number: '',
         password: '',
         confirmPassword: ''
@@ -39,10 +39,10 @@ export class RegisterPage {
         loader.present();
 
         if (this.user.password != this.user.confirmPassword) {
-            
+            this.popAlert('Password need to match', 'warning', 7000, 'bottom');
         } else {
 
-            this.http.post('http://beeapi.azurewebsites.net/api/beekeeper', this.user).map(res => res.json()).subscribe(
+            this.http.post('https://beeapi.azurewebsites.net/api/beekeeper', this.user).map(res => res.json()).subscribe(
                 data => {
                     if (data) {
                         this.navCtrl.setRoot(LoginPage, { email: this.user.email });
@@ -51,7 +51,7 @@ export class RegisterPage {
                             firstName: '',
                             lastName: '',
                             email: '',
-                            phone: '',
+                            phoneNumber: '',
                             number: '',
                             password: '',
                             confirmPassword: ''

@@ -2,5 +2,6 @@
   "name": "io.cordova.myapp1262b6",
   "app_id": "",
   "integrations": {},
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "defaultBrowser":"google chrome"
 }

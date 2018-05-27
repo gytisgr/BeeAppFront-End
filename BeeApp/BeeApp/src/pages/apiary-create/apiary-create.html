@@ -10,37 +10,44 @@
 <ion-content padding>
 
     <ion-item>
-        <h1>Add New Apiary</h1>
-        <h2>Please, enter the following information:</h2>
+        <h1 *ngIf="edit == true">Edit Apiary</h1>
+        <h2 *ngIf="edit == true">Please, edit the following information:</h2>
+        <h1 *ngIf="edit == false">Add New Apiary</h1>
+        <h2 *ngIf="edit == false">Please, enter the following information:</h2>
     </ion-item>
 
     <ion-list>
         <ion-item>
             <ion-label stacked color="primary">Apiary Name</ion-label>
-            <ion-input placeholder="Enter apiary name"></ion-input>         <!--Apiary_name-->
+            <ion-input placeholder="Enter apiary name" [(ngModel)]="apiaryObject.name"></ion-input>         <!--Apiary_name-->
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Location</ion-label>
-            <ion-input placeholder="Enter town, village"></ion-input>       <!--Apiary_place-->
+            <ion-input placeholder="Enter town, village" [(ngModel)]="apiaryObject.place"></ion-input>       <!--Apiary_place-->
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Latitude</ion-label>
-            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_latitude-->
+            <ion-input placeholder="e.g. 44.399854" [(ngModel)]="apiaryObject.longtitude"></ion-input>            <!--Apiary_latitude-->
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Longtitude</ion-label>
-            <ion-input placeholder="e.g. 44.399854"></ion-input>            <!--Apiary_longtitude-->    
+            <ion-input placeholder="e.g. 44.399854" [(ngModel)]="apiaryObject.latitude"></ion-input>            <!--Apiary_longtitude-->    
         </ion-item>
 
         <ion-row padding>
             <ion-col width-33>
                 <ion-buttons start>
-                    <button ion-button outline>Cancel</button>
+                    <button ion-button outline (click)="goBack()">Cancel</button>
                 </ion-buttons>
             </ion-col>
-            <ion-col width-67>
+            <ion-col width-67 *ngIf="edit == false">
                 <ion-buttons end>
-                    <button ion-button block type="submit">Save</button>
+                    <button ion-button block type="submit" (click)="createApiary()">Save</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67 *ngIf="edit == true">
+                <ion-buttons end>
+                    <button ion-button block type="submit" (click)="editApiary()">Save</button>
                 </ion-buttons>
             </ion-col>
         </ion-row>

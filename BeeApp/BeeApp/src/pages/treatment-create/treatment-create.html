@@ -9,45 +9,62 @@
 <ion-content padding>
 
     <ion-item>
-        <h1>Add New Treatment</h1>
-        <h2>Please, enter the following information:</h2>
+        <h1 *ngIf="edit == true">Edit Treatment</h1>
+        <h2 *ngIf="edit == true">Please, edit the following information:</h2>
+        <h1 *ngIf="edit == false">Add New Treatment</h1>
+        <h2 *ngIf="edit == false">Please, enter the following information:</h2>
     </ion-item>
 
     <ion-list>
-        <ion-item>
-            <ion-label stacked color="primary">Date</ion-label>         <!--Treatment_date-->
-            <ion-input placeholder="Enter date"></ion-input>
+        <ion-item *ngIf="edit == false">
+            <ion-label>Hive</ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="hive">
+                <ion-option *ngFor="let hive of hivesList" [value]="hive.id">{{ hive.name }}</ion-option>
+            </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label stacked color="primary">Disease</ion-label>      <!--Treatment_disease-->
-            <ion-input placeholder="Select disease type"></ion-input>
+            <ion-label stacked color="primary">Treatment Name</ion-label>     <!--Treatment_quantity-->
+            <ion-input placeholder="Enter Treatment Name" [(ngModel)]="treatmentObject.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Date</ion-label>         <!--Treatment_date-->
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="treatmentObject.date"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Product</ion-label>      <!--Treatment_product-->
-            <ion-input placeholder="Enter product name"></ion-input>
+            <ion-input placeholder="Enter product name" [(ngModel)]="treatmentObject.product"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Quantity</ion-label>     <!--Treatment_quantity-->
-            <ion-input placeholder="Enter quantity"></ion-input>
+            <ion-input type="number" placeholder="Enter quantity" [(ngModel)]="treatmentObject.quantity"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Unit</ion-label>         <!--Treatment_unit-->
-            <ion-select [(ngModel)]="treatment-unit" interface="action-sheet" placeholder="Select unit">
-                <ion-option value="g">Grams</ion-option>
-                <ion-option value="ml">Milliliters</ion-option>
-                <ion-option value="s">Stripes</ion-option>
+            <ion-select [(ngModel)]="treatmentObject.unit" interface="action-sheet" placeholder="Select unit">
+                <ion-option value="Grams">Grams</ion-option>
+                <ion-option value="Millimiters">Milliliters</ion-option>
+                <ion-option value="Stripes">Stripes</ion-option>
             </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Note</ion-label>
+            <ion-textarea rows="4" #noteData></ion-textarea>
         </ion-item>
 
         <ion-row padding>
             <ion-col width-33>
                 <ion-buttons start>
-                    <button ion-button outline>Cancel</button>
+                    <button ion-button outline (click)="goBack()">Cancel</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67 *ngIf="edit == false">
+                <ion-buttons end>
+                    <button ion-button block (click)="createTreatment(noteData.value)">Save</button>
                 </ion-buttons>
             </ion-col>
             <ion-col width-67>
-                <ion-buttons end>
-                    <button ion-button block>Save</button>
+                <ion-buttons end *ngIf="edit == true">
+                    <button ion-button block (click)="editTreatment(noteData.value)">Save</button>
                 </ion-buttons>
             </ion-col>
         </ion-row>

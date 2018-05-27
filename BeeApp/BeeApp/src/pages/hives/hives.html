@@ -20,268 +20,54 @@
 </ion-header>
 
 <ion-content>
+    <ng-container>
+        <div *ngIf="hives.length == 0">
+            <ion-card padding>
+                There are no hives created.
+            </ion-card>
+        </div>
 
-    <ion-card (click)="openHiveInner(hive.id)" *ngFor="let hive of hives">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>{{ hive.name }}</h2>                                  <!--Avilio pavadinimas Hive_name-->
-            <p>Hive {{ hive.status ? 'active':'inactive'}}</p>
-            <!--Avilio statusas Hive_status
-                1 => "Hive active"
-                0 => "Hive inactive"
-            -->
-        </ion-item>
-        <ion-card-content>
-            <p>{{ hive.note != 'null' ? note: '' }}</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small *ngFor="let inspection of (hive.inspections | slice: -1)">
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>{{ inspection.strength }} strength</div>                     <!--Naujausias áraðas Bee_strength-->
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>{{ hive.monitoring.temperature }}&deg;C</div>                         <!--Naujausias áraðas Monitoring_temperature-->
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    {{ hive.date | date: 'yyyy-MM-dd' }}                                  <!--Paskutinës (naujausios) darytos apþiûros data Inspection_date-->
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+        <div *ngIf="hives.length">
+            <ion-card (click)="openHiveInner(hive.id)" *ngFor="let hive of hives;trackBy: trackByFn">
+                <ion-item>
+                    <ion-avatar item-left>
+                        <img src="./assets/img/hive-img.jpg">
+                    </ion-avatar>
+                    <h2>{{ hive.name }}</h2>                                  <!--Avilio pavadinimas Hive_name-->
+                    <p>Hive {{ hive.status ? 'active':'inactive'}}</p>
+                    <!--Avilio statusas Hive_status
+                    1 => "Hive active"
+                    0 => "Hive inactive"
+                -->
+                </ion-item>
+                <ion-card-content>
+                    <p>{{ hive.note != 'null' ? note: '' }}</p>
+                </ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <button ion-button icon-left clear small *ngFor="let inspection of (hive.inspections | slice: -1)">
+                            <ion-icon name="ios-pulse"></ion-icon>
+                            <div>{{ inspection.strength }} strength</div>                     <!--Naujausias áraðas Bee_strength-->
+                        </button>
+                    </ion-col>
+                    <ion-col>
+                        <button ion-button icon-left clear small *ngFor="let monitoring of (hive.monitoring | slice: -1)">
+                            <ion-icon name="ios-thermometer"></ion-icon>
+                            <div>{{ monitoring.temperature }}&deg;C</div>                         <!--Naujausias áraðas Monitoring_temperature-->
+                        </button>
+                    </ion-col>
+                    <ion-col center text-center>
+                        <ion-note>
+                            {{ hive.date | date: 'yyyy-MM-dd' }}                                  <!--Paskutinës (naujausios) darytos apþiûros data Inspection_date-->
+                        </ion-note>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </div>
 
-    <!--<ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    </ng-container>
 
-    <ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openHiveInner()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/hive-img.jpg">
-            </ion-avatar>
-            <h2>#2 Avilys</h2>
-            <p>Hive inactive</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Everything is fine!</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-pulse"></ion-icon>
-                    <div>80% strength</div>
-                </button>
-            </ion-col>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-thermometer"></ion-icon>
-                    <div>32&deg;C</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>-->
-
-    <ion-fab right bottom>
+    <ion-fab right bottom style="z-index:100;position:fixed;right:20px;bottom:65px;">
         <button ion-fab color="primary" (click)="openHivePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>
     </ion-fab>
 

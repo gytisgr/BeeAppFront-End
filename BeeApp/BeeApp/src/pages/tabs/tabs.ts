@@ -1,6 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 
-import { NavController, NavParams, Tabs, MenuController, Events } from 'ionic-angular';
+import { NavController, NavParams, Tabs, MenuController, Events, Select } from 'ionic-angular';
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
@@ -13,6 +13,10 @@ import { FeedingPage } from '../feeding/feeding';
 import { LoginPage } from '../login/login';
 import { ApiaryService } from "../../app/service/apiaryService";
 import { AuthenticationService } from "../../app/service/authenticationService";
+import { InspectionService } from "../../app/service/inspectionService";
+import { ApiariesPage } from "../apiaries/apiaries";
+import { ProfilePage } from "../profile/profile";
+import { InfoPage } from "../info/info";
 
 @Component({
     templateUrl: 'tabs.html'
@@ -20,10 +24,11 @@ import { AuthenticationService } from "../../app/service/authenticationService";
 export class TabsPage {
 
     @ViewChild('tabs') tabRef: Tabs;
+    @ViewChild('apiarySelect') apiarySelect: Select;
 
     // this tells the tabs component which Pages
     // should be each tab's root Page
-    tab1Root = HomePage;
+    tab1Root = ApiariesPage;
     tab2Root = HivesPage;
     tab3Root = TreatmentPage;
     tab4Root = HarvestPage;
@@ -31,6 +36,8 @@ export class TabsPage {
 
     token: string;
     apiaries = [];
+    enableTabs = false;
+    hiveCheck = false;
 
     constructor(
         public navCtrl: NavController,
@@ -39,8 +46,14 @@ export class TabsPage {
         public menuCtrl: MenuController,
         public events: Events,
         public apiaryService: ApiaryService,
-        public authService: AuthenticationService) {
+        public authService: AuthenticationService,
+        private cd: ChangeDetectorRef) {
 
+        this.getToken();
+        this.getApiaries();
+    }
+
+    ionOpen() {
         this.getToken();
         this.getApiaries();
     }
@@ -55,23 +68,77 @@ export class TabsPage {
 
     getApiaries() {
 
-        this.http.get('http://beeapi.azurewebsites.net/api/apiary', { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
+        this.http.get('https://beeapi.azurewebsites.net/api/apiary', { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
             data => {
                 if (data) {
                     this.apiaries = data;
+                    this.cd.markForCheck();
                 }
             },
             error => {
                 if (error.status == 400) {
-                    
+
+                }
+            },
+            () => {
+
+                //this.cd.detectChanges();
+                //this.apiarySelect.open();
+                if (this.apiaries.length == 0) {
+                    this.enableTabs = false;
                 }
             });
     }
 
+    getHives(apiaryId) {
+        this.http.get('https://beeapi.azurewebsites.net/api/hive/' + apiaryId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
+            data => {
+                if (data) {
+                    if (data.length > 0) {
+                        this.hiveCheck = true;
+                    } else {
+                        this.hiveCheck = false;
+                    }
+
+                }
+            },
+            error => {
+                if (error.status == 400) {
+
+                }
+            },
+            () => {
+                // done                
+                console.log(this.enableTabs && this.hiveCheck);
+            });
+    }
+
+    openApiaries() {
+        this.menuCtrl.close();
+        this.navCtrl.push(ApiariesPage);
+    }
+
     selectedApiary(apiaryId: number) {
         this.menuCtrl.close();
+        this.enableTabs = true;
+        this.getHives(apiaryId)
         this.apiaryService.setId(apiaryId);
         this.tabRef.select(0);
         this.tabRef.select(1);
+    }
+
+    openProfilePage() {
+        this.menuCtrl.close();
+        this.navCtrl.push(ProfilePage);
+    }
+
+    openInfoPage() {
+        this.menuCtrl.close();
+        this.navCtrl.push(InfoPage);
+    }
+
+    logout() {
+        this.authService.setToken(null);
+        this.navCtrl.setRoot(LoginPage);
     }
 }

@@ -1,1 +1,1 @@
-ionic serve --port 8101
+ionic serve -p 8101

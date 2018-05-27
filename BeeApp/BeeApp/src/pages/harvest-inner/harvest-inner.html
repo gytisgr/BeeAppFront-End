@@ -15,39 +15,46 @@
 
 <ion-content padding>
 
-    <ion-list>
-        <ion-row style="height: 1rem"></ion-row>
+    <ng-container *ngIf="harvest">
+        <ion-list>
+            <ion-row style="height: 1rem"></ion-row>
 
-        <ion-item no-lines>
-            <h1>Harvest</h1>
-        </ion-item>
+            <ion-item no-lines>
+                <h1>Harvest</h1>
+            </ion-item>
 
-        <ion-item no-lines>
-            <ion-avatar item-left>
-                <img src="./assets/img/honey3.jpg">
-            </ion-avatar>
-            <h2>#1 Honey spring</h2>                            <!--Harvest_name-->
-            <p>Honey</p>                                        <!--Harvest_product-->
-        </ion-item>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="ios-color-fill"></ion-icon>
-                    <div>120 kg</div>                           <!--Harvest_quantity, Harvest_unit-->
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Harvest date: 2018-04-20                    <!--Harvest_date-->
-                </ion-note>
-            </ion-col>
-        </ion-row>
+            <ion-item no-lines>
+                <ion-avatar item-left>
+                    <img src="./assets/img/honey3.jpg">
+                </ion-avatar>
+                <h2>{{ harvest.name }}</h2>                            <!--Harvest_name-->
+                <p>{{ harvest.product }}</p>                                        <!--Harvest_product-->
+            </ion-item>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="ios-color-fill"></ion-icon>
+                        <div>{{ harvest.quantity }} {{ harvest.unit }}</div>                           <!--Harvest_quantity, Harvest_unit-->
+                    </button>
+                </ion-col>
+                <ion-col center text-center>
+                    <ion-note>
+                        Harvest date: {{ harvest.date | date: 'yyyy-MM-dd' }}                   <!--Harvest_date-->
+                    </ion-note>
+                </ion-col>
+            </ion-row>
 
-        <ion-item>
-            <p>Notes</p>
-            <h2>Some text about something.</h2>                 <!--Harvest_notes-->
-        </ion-item>
+            <ion-item>
+                <p>Notes</p>
+                <h2>{{ harvest.note != 'null' ? harvest.note:'' }}</h2>                 <!--Harvest_notes-->
+            </ion-item>
 
-    </ion-list>
+        </ion-list>
+    </ng-container>
+
+    <ion-fab right bottom style="z-index:100;position:fixed;right:20px;bottom:65px;">
+        <button ion-fab color="warning" (click)="editHarvestPage()" style="bottom: 10px;"><ion-icon name="ios-create-outline"></ion-icon></button>
+        <button ion-fab color="danger" (click)="deleteHarvest()"><ion-icon name="ios-remove-circle-outline"></ion-icon></button>
+    </ion-fab>
 
 </ion-content>

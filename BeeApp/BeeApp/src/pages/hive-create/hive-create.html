@@ -9,28 +9,30 @@
 <ion-content padding>
 
     <ion-item>
-        <h1>Add New Hive</h1>
-        <h2>Please, enter the following information:</h2>
+        <h1 *ngIf="edit == true">Edit Hive</h1>
+        <h2 *ngIf="edit == true">Please, edit the following information:</h2>
+        <h1 *ngIf="edit == false">Add New Hive</h1>
+        <h2 *ngIf="edit == false">Please, enter the following information:</h2>
     </ion-item>
 
     <ion-list>
         <ion-item>
-            <ion-label stacked color="primary">Hive Number</ion-label>      <!--Hive_name-->
-            <ion-input placeholder="Enter hive number"></ion-input>
+            <ion-label stacked color="primary">Hive Name</ion-label>      <!--Hive_name-->
+            <ion-input placeholder="Enter hive name" [(ngModel)]="hiveObject.name"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Hive type</ion-label>             <!--Hive_type-->
-            <ion-select [(ngModel)]="hive-type" interface="action-sheet" placeholder="Select hive type">
-                <ion-option value="vertical">Vertical</ion-option>
-                <ion-option value="horizontal">Horizontal</ion-option>
-                <ion-option value="nucleus">Nucleus</ion-option>
+            <ion-select [(ngModel)]="hiveObject.type" interface="action-sheet" placeholder="Select hive type">
+                <ion-option [value]="vertical">Vertical</ion-option>
+                <ion-option [value]="horizontal">Horizontal</ion-option>
+                <ion-option [value]="nucleus">Nucleus</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Hive status</ion-label>             <!--Hive_status-->
-            <ion-select [(ngModel)]="hive-status" interface="action-sheet" placeholder="Select hive status">
-                <ion-option value="active">Active</ion-option>
-                <ion-option value="inactive">Inactive</ion-option>
+            <ion-select [(ngModel)]="hiveObject.status" interface="action-sheet" placeholder="Select hive status">
+                <ion-option [value]="true">Active</ion-option>
+                <ion-option [value]="false">Inactive</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
@@ -38,30 +40,39 @@
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Bee family</ion-label>             <!--Hive_family-->
-            <ion-select [(ngModel)]="bee-family" interface="action-sheet" placeholder="Select bee family">
-                <ion-option value="buckfast">Buckfast</ion-option>
-                <ion-option value="carnica">Carnica</ion-option>
-                <ion-option value="other">Other</ion-option>
+            <ion-select [(ngModel)]="hiveObject.family" interface="action-sheet" placeholder="Select bee family">
+                <ion-option [value]="buckfast">Buckfast</ion-option>
+                <ion-option [value]="carnica">Carnica</ion-option>
+                <ion-option [value]="other">Other</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Bee family origin</ion-label>             <!--Hive_family_origin-->
-            <ion-select [(ngModel)]="bee-family-origin" interface="action-sheet" placeholder="Select bee family origin">
-                <ion-option value="purchase">Purchase</ion-option>
-                <ion-option value="swarming">Natural swarming</ion-option>
-                <ion-option value="loss">Loss</ion-option>
+            <ion-select [(ngModel)]="hiveObject.familyOrigin" interface="action-sheet" placeholder="Select bee family origin">
+                <ion-option [value]="purchase">Purchase</ion-option>
+                <ion-option [value]="swarming">Natural swarming</ion-option>
+                <ion-option [value]="loss">Loss</ion-option>
             </ion-select>
         </ion-item>
-
+        <ion-item>
+            <ion-label stacked color="primary">Note</ion-label>
+            <ion-textarea rows="4" #noteData></ion-textarea>
+        </ion-item>
+            
         <ion-row>
             <ion-col padding width-33>
                 <ion-buttons start>
-                    <button ion-button outline click="goBack()">Cancel</button>
+                    <button ion-button outline (click)="goBack()">Cancel</button>
                 </ion-buttons>
             </ion-col>
-            <ion-col padding width-67>
+            <ion-col padding width-67 *ngIf="edit == false">
                 <ion-buttons end>
-                    <button ion-button block>Save</button>
+                    <button ion-button block (click)="createHive(noteData.value)">Save</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col padding width-67 *ngIf="edit == true">
+                <ion-buttons end>
+                    <button ion-button block (click)="editHive(noteData.value)">Update</button>
                 </ion-buttons>
             </ion-col>
         </ion-row>

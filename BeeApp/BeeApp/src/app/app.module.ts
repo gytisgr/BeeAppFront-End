@@ -27,12 +27,21 @@ import { StatsPage } from '../pages/stats/stats';
 import { TreatmentPage } from '../pages/treatment/treatment';
 import { TreatmentInnerPage } from '../pages/treatment-inner/treatment-inner';
 import { TreatmentCreatePage } from '../pages/treatment-create/treatment-create';
-import { NativeStorage } from '@ionic-native/native-storage';
 
 // Services
 import { ApiaryService } from './service/apiaryService';
 import { AuthenticationService } from './service/authenticationService';
 import { HiveService } from './service/hiveService';
+import { ChartsModule } from 'ng2-charts';
+import { InspectionService } from "./service/inspectionService";
+import { DatePipe } from "@angular/common";
+import { TreatmentService } from "./service/treatmentService";
+import { HarvestService } from "./service/harvestService";
+import { FeedingsService } from "./service/feedingsService";
+import { ProfilePage } from "../pages/profile/profile";
+import { ChangePasswordPage } from "../pages/change-password/change-password";
+import { InfoPage } from "../pages/info/info";
+import { ArraySortPipe } from "./pipe/sortPipe";
 
 
 
@@ -60,9 +69,14 @@ import { HiveService } from './service/hiveService';
         StatsPage,
         TreatmentPage,
         TreatmentInnerPage,
-        TreatmentCreatePage
+        TreatmentCreatePage,
+        ProfilePage,
+        ChangePasswordPage,
+        InfoPage,
+        ArraySortPipe
     ],
     imports: [
+        ChartsModule,
         BrowserModule,
         HttpModule,
         IonicModule.forRoot(MyApp)
@@ -91,13 +105,20 @@ import { HiveService } from './service/hiveService';
         StatsPage,
         TreatmentPage,
         TreatmentInnerPage,
-        TreatmentCreatePage
+        TreatmentCreatePage,
+        ProfilePage,
+        ChangePasswordPage,
+        InfoPage
     ],
     providers: [
-        NativeStorage,
         ApiaryService,
         AuthenticationService,
         HiveService,
+        InspectionService,
+        TreatmentService,
+        HarvestService,
+        FeedingsService,
+        DatePipe,
         { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })

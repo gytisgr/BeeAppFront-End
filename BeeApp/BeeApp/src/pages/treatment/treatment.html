@@ -22,163 +22,41 @@
 
 <ion-content>
 
-    <ion-card (click)="openTreatmentInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>                       <!--Treatment_name-->
-            <p>Product name used for treatment.</p>     <!--Treatment_product-->
-        </ion-item>
-        <ion-card-content>
-            <p>Some notes.</p>                          <!--Treatment_disease-->
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-medkit"></ion-icon>
-                    <div>10 stripes per hive</div>      <!--Treatement_quantity, Treatment_unit-->
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20          <!--Treatment_date-->
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    <div *ngIf="treatments.length == 0">
+        <ion-card padding>
+            There are no treatments created.
+        </ion-card>
+    </div>
 
-    <ion-card (click)="openTreatmentInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>
-            <p>Product name used for treatment.</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Some notes.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-medkit"></ion-icon>
-                    <div>10 stripes per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    <div *ngIf="treatments.length">
+        <ion-card (click)="openTreatmentInnerPage(treatment.id)" *ngFor="let treatment of treatments | arraySort:'-date';">
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="./assets/img/medicine.jpg">
+                </ion-avatar>
+                <h2>{{ treatment.name }}</h2>                       <!--Treatment_name-->
+                <p>{{ treatment.product }} used for treatment.</p>     <!--Treatment_product-->
+            </ion-item>
+            <ion-card-content>
+                <p>{{ treatment.note != 'null' ? treatment.note:'' }}</p>                          <!--Treatment_disease-->
+            </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="md-medkit"></ion-icon>
+                        <div>{{ treatment.quantity }} {{ treatment.unit }} per hive</div>      <!--Treatement_quantity, Treatment_unit-->
+                    </button>
+                </ion-col>
+                <ion-col center text-center>
+                    <ion-note>
+                        Treatment date: {{ treatment.date | date: 'yyyy-MM-dd' }}         <!--Treatment_date-->
+                    </ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </div>
 
-    <ion-card (click)="openTreatmentInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>
-            <p>Product name used for treatment.</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Some notes.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-medkit"></ion-icon>
-                    <div>10 stripes per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openTreatmentInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>
-            <p>Product name used for treatment.</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Some notes.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-medkit"></ion-icon>
-                    <div>10 stripes per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openTreatmentInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>
-            <p>Product name used for treatment.</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Some notes.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-medkit"></ion-icon>
-                    <div>10 stripes per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openTreatmentInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>
-            <p>Product name used for treatment.</p>
-        </ion-item>
-        <ion-card-content>
-                <p>Some notes.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-medkit"></ion-icon>
-                    <div>10 stripes per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-fab right bottom>
+    <ion-fab right bottom style="z-index:100;position:fixed;right:20px;bottom:65px;">
         <button ion-fab color="primary" (click)="openTreatmentCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>
     </ion-fab>
 

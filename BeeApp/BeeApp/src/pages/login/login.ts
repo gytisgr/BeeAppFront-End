@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { ToastController, Platform } from 'ionic-angular';
-import { NativeStorage } from '@ionic-native/native-storage';
 
 import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
@@ -29,27 +28,14 @@ export class LoginPage {
         public toastCtrl: ToastController,
         public http: Http,
         public platform: Platform,
-        public nativeStorage: NativeStorage,
         public authService: AuthenticationService) {
 
-        this.username = 'k.jankauskas@hotmail.com';
-        this.password = 'testtesttest';
-        this.processlogin();
+        //this.username = 'k.jankauskas@hotmail.com';
+        //this.password = 'testing1';
+        //this.processlogin();
 
         if (navParams.get('email')) {
             this.username = navParams.get('email');
-        }
-
-        if (this.platform.is('cordova')) {
-
-            this.nativeStorage.getItem('credentials').then(
-                data => {
-                    if (data) {
-                        this.username = data.username;
-                        this.password = data.password;
-                    }
-                    console.log(data);
-                });
         }
     }
 
@@ -58,9 +44,6 @@ export class LoginPage {
     }
 
     processlogin() {
-        if (this.platform.is('cordova')) {
-            this.nativeStorage.setItem('credentials', { property: this.username, anotherProperty: this.password });
-        }
 
         let loader = this.loadingCtrl.create({
             spinner: 'crescent',
@@ -76,7 +59,7 @@ export class LoginPage {
         let headers = new Headers();
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-        this.http.post('http://beeapi.azurewebsites.net/oauth/token', body.toString(), { headers: headers }).map(res => res.json()).subscribe(
+        this.http.post('https://beeapi.azurewebsites.net/oauth/token', body.toString(), { headers: headers }).map(res => res.json()).subscribe(
             data => {
                 if (data) {
                     loader.dismiss();

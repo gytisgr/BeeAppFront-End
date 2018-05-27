@@ -15,40 +15,47 @@
 
 <ion-content padding>
 
-    <ion-list>
-        <ion-row style="height: 1rem"></ion-row>
+    <ng-container *ngIf="treatment">
+        <ion-list>
+            <ion-row style="height: 1rem"></ion-row>
 
-        <ion-item no-lines>
-            <h1>Treatment</h1>
-        </ion-item>
+            <ion-item no-lines>
+                <h1>Treatment</h1>
+            </ion-item>
 
-        <ion-item no-lines>
-            <ion-avatar item-left>
-                <img src="./assets/img/medicine.jpg">
-            </ion-avatar>
-            <h2>#1 Treatment</h2>                       <!--Treatment_name-->
-            <p>Product name used for treatment.</p>     <!--Treatment_product-->
-        </ion-item>
+            <ion-item no-lines>
+                <ion-avatar item-left>
+                    <img src="./assets/img/medicine.jpg">
+                </ion-avatar>
+                <h2>{{ treatment.name }}</h2>                       <!--Treatment_name-->
+                <p>{{ treatment.product }} used for treatment.</p>     <!--Treatment_product-->
+            </ion-item>
 
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-color-filter"></ion-icon>
-                    <div>10 stripes</div>               <!--Treatement_quantity, Treatment_unit-->
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Treatment date: 2018-04-20          <!--Treatment_date-->
-                </ion-note>
-            </ion-col>
-        </ion-row>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="md-color-filter"></ion-icon>
+                        <div>{{ treatment.quantity }} {{ treatment.unit }}</div>               <!--Treatement_quantity, Treatment_unit-->
+                    </button>
+                </ion-col>
+                <ion-col center text-center>
+                    <ion-note>
+                        Treatment date: {{ treatment.date | date: 'yyyy-MM-dd' }}          <!--Treatment_date-->
+                    </ion-note>
+                </ion-col>
+            </ion-row>
 
-        <ion-item>
-            <p>Notes</p>
-            <h2>Some text about something.</h2>         <!--Treatment_disease-->
-        </ion-item>
+            <ion-item>
+                <p>Notes</p>
+                <h2>{{ treatment.note != 'null' ? treatment.note:'' }}</h2>         <!--Treatment_disease-->
+            </ion-item>
 
-    </ion-list>
+        </ion-list>
+    </ng-container>
+
+    <ion-fab right bottom style="z-index:100;position:fixed;right:20px;bottom:65px;">
+        <button ion-fab color="warning" (click)="editTreatmentPage()" style="bottom: 10px;"><ion-icon name="ios-create-outline"></ion-icon></button>
+        <button ion-fab color="danger" (click)="deleteTreatment()"><ion-icon name="ios-remove-circle-outline"></ion-icon></button>
+    </ion-fab>
 
 </ion-content>

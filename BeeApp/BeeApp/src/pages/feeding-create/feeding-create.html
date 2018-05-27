@@ -9,55 +9,68 @@
 <ion-content padding>
 
     <ion-item>
-        <h1>Add New Feeding</h1>
-        <h2>Please, enter the following information:</h2>
+        <h1 *ngIf="edit == true">Edit Feeding</h1>
+        <h2 *ngIf="edit == true">Please, edit the following information:</h2>
+        <h1 *ngIf="edit == false">Add New Feeding</h1>
+        <h2 *ngIf="edit == false">Please, enter the following information:</h2>
     </ion-item>
 
     <ion-list>
-        <ion-item>
-            <ion-label stacked color="primary">Feeding name</ion-label>     <!--Feeding_name-->
-            <ion-input placeholder="Enter feeding name"></ion-input>
+        <ion-item *ngIf="edit == false">
+            <ion-label>Hive</ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="hive">
+                <ion-option *ngFor="let hive of hivesList" [value]="hive.id">{{ hive.name }}</ion-option>
+            </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label stacked color="primary">Date</ion-label>             <!--Feeding_date-->
-            <ion-input placeholder="Enter date"></ion-input>
+            <ion-label stacked color="primary">Feeding name</ion-label>     <!--Feeding_name-->
+            <ion-input placeholder="Enter feeding name" [(ngModel)]="feedingObject.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked color="primary">Date</ion-label>         <!--Feeding_date-->
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="feedingObject.date"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Feeding product</ion-label>  <!--Feeding_product-->
-            <ion-select [(ngModel)]="feeding-product" interface="action-sheet" placeholder="Select feeding product">
-                <ion-option value="pollen">Pollen</ion-option>
-                <ion-option value="sugar">Sugar</ion-option>
-                <ion-option value="syrup">Syrup</ion-option>
+            <ion-select [(ngModel)]="feedingObject.product" interface="action-sheet" placeholder="Select feeding product">
+                <ion-option [value]="Pollen">Pollen</ion-option>
+                <ion-option [value]="Sugar">Sugar</ion-option>
+                <ion-option [value]="Syrup">Syrup</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Quantity</ion-label>         <!--Feeding_quantity-->
-            <ion-input placeholder="Enter quantity"></ion-input>
+            <ion-input type="number" placeholder="Enter quantity" [(ngModel)]="feedingObject.quantity"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Unit</ion-label>             <!--Feeding_unit-->
-            <ion-select [(ngModel)]="feeding-unit" interface="action-sheet" placeholder="Select unit">
-                <ion-option value="g">Grams</ion-option>
-                <ion-option value="g">Kilograms</ion-option>
-                <ion-option value="ml">Milliliters</ion-option>
-                <ion-option value="l">Liters</ion-option>
-                <ion-option value="f">Frames</ion-option>
+            <ion-select [(ngModel)]="feedingObject.unit" interface="action-sheet" placeholder="Select unit">
+                <ion-option [value]="Grams">Grams</ion-option>
+                <ion-option [value]="Kilograms">Kilograms</ion-option>
+                <ion-option [value]="Milliliters">Milliliters</ion-option>
+                <ion-option [value]="Liters">Liters</ion-option>
+                <ion-option [value]="Frames">Frames</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Notes</ion-label>            <!--Feeding_notes-->
-            <ion-input placeholder="Add notes"></ion-input>
+            <ion-textarea rows="4" #noteData></ion-textarea>
         </ion-item>
 
         <ion-row padding>
             <ion-col width-33>
                 <ion-buttons start>
-                    <button ion-button outline>Cancel</button>
+                    <button ion-button outline (click)="goBack()">Cancel</button>
                 </ion-buttons>
             </ion-col>
-            <ion-col width-67>
+            <ion-col width-67 *ngIf="edit == false">
                 <ion-buttons end>
-                    <button ion-button block>Save</button>
+                    <button ion-button block (click)="createFeeding(noteData.value)">Save</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67 *ngIf="edit == true">
+                <ion-buttons end>
+                    <button ion-button block (click)="editFeeding(noteData.value)">Save</button>
                 </ion-buttons>
             </ion-col>
         </ion-row>

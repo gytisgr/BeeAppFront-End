@@ -3,7 +3,8 @@
 @Injectable()
 export class HiveService {
     id: number;
-    hive = {};
+    hive: any = null;
+    editHive: any = null;
 
     constructor() {
     }
@@ -22,5 +23,13 @@ export class HiveService {
 
     getHiveObject() {
         return this.hive;
+    }
+
+    setEditHiveObject(editHiveObject) {
+        this.editHive = editHiveObject;
+    }
+
+    getEditHiveObject() {
+        return this.editHive;
     }
 }

@@ -16,9 +16,13 @@ export class AuthenticationService {
         return this.token;
     }
 
-    getHeader() {
+    getHeader(json?: boolean) {
         let headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        if (json) {
+            headers.append('Content-Type', 'application/json');
+        } else {
+            headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        }
         headers.append('Accept', 'application/json');
         headers.append('Authorization', 'Bearer ' + this.token);
 

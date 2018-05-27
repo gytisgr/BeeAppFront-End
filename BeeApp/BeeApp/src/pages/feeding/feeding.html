@@ -21,163 +21,41 @@
 
 <ion-content>
 
-    <ion-card (click)="openFeedingInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/sugar.jpg">
-            </ion-avatar>
-            <h2>#1 Feeding</h2>                                     <!--Feeding_name-->
-            <p>Syrup</p>                                            <!--Feeding_product-->
-        </ion-item>
-        <ion-card-content>
-            <p>Notes about feeding.</p>                             <!--Feeding_notes-->
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-restaurant"></ion-icon>
-                    <div>10kg per hive</div>                        <!--Feeding_quantity, Feeding_unit-->
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Feeding date: 2018-04-20                        <!--Feeding_date-->
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    <div *ngIf="feedings.length == 0">
+        <ion-card padding>
+            There are no feedings created.
+        </ion-card>
+    </div>
 
-    <ion-card (click)="openFeedingInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/sugar.jpg">
-            </ion-avatar>
-            <h2>#1 Feeding</h2>
-            <p>Syrup</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Notes about feeding.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-restaurant"></ion-icon>
-                    <div>10kg per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Feeding date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
+    <div *ngIf="feedings.length">
+        <ion-card (click)="openFeedingInnerPage(feeding.id)" *ngFor="let feeding of feedings | arraySort:'-date';">
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="./assets/img/sugar.jpg">
+                </ion-avatar>
+                <h2>{{ feeding.name }}</h2>                                     <!--Feeding_name-->
+                <p>{{ feeding.product }}</p>                                            <!--Feeding_product-->
+            </ion-item>
+            <ion-card-content>
+                <p>{{ feeding.note != 'null' ? feeding.note:'' }}</p>                             <!--Feeding_notes-->
+            </ion-card-content>
+            <ion-row>
+                <ion-col>
+                    <button ion-button icon-left clear small>
+                        <ion-icon name="md-restaurant"></ion-icon>
+                        <div>{{ feeding.quantity }} {{ feeding.unit }} per hive</div>             <!--Feeding_quantity, Feeding_unit-->
+                    </button>
+                </ion-col>
+                <ion-col center text-center>
+                    <ion-note>
+                        Feeding date: {{ feeding.date | date: 'yyyy-MM-dd' }}                        <!--Feeding_date-->
+                    </ion-note>
+                </ion-col>
+            </ion-row>
+        </ion-card>
+    </div>
 
-    <ion-card (click)="openFeedingInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/sugar.jpg">
-            </ion-avatar>
-            <h2>#1 Feeding</h2>
-            <p>Syrup</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Notes about feeding.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-restaurant"></ion-icon>
-                    <div>10kg per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Feeding date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openFeedingInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/sugar.jpg">
-            </ion-avatar>
-            <h2>#1 Feeding</h2>
-            <p>Syrup</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Notes about feeding.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-restaurant"></ion-icon>
-                    <div>10kg per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Feeding date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openFeedingInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/sugar.jpg">
-            </ion-avatar>
-            <h2>#1 Feeding</h2>
-            <p>Syrup</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Notes about feeding.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-restaurant"></ion-icon>
-                    <div>10kg per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Feeding date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-card (click)="openFeedingInnerPage()">
-        <ion-item>
-            <ion-avatar item-left>
-                <img src="./assets/img/sugar.jpg">
-            </ion-avatar>
-            <h2>#1 Feeding</h2>
-            <p>Syrup</p>
-        </ion-item>
-        <ion-card-content>
-            <p>Notes about feeding.</p>
-        </ion-card-content>
-        <ion-row>
-            <ion-col>
-                <button ion-button icon-left clear small>
-                    <ion-icon name="md-restaurant"></ion-icon>
-                    <div>10kg per hive</div>
-                </button>
-            </ion-col>
-            <ion-col center text-center>
-                <ion-note>
-                    Feeding date: 2018-04-20
-                </ion-note>
-            </ion-col>
-        </ion-row>
-    </ion-card>
-
-    <ion-fab right bottom>
+    <ion-fab right bottom style="z-index:100;position:fixed;right:20px;bottom:65px;">
         <button ion-fab color="primary" (click)="openFeedingCreatePage()"><ion-icon name="ios-add-circle-outline"></ion-icon></button>
     </ion-fab>
 

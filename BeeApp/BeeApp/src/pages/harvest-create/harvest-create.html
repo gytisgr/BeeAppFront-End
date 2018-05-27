@@ -9,47 +9,55 @@
 <ion-content padding>
 
     <ion-item>
-        <h1>Add New Harvest</h1>
-        <h2>Please, enter the following information:</h2>
+        <h1 *ngIf="edit == true">Edit Harvest</h1>
+        <h2 *ngIf="edit == true">Please, edit the following information:</h2>
+        <h1 *ngIf="edit == false">Add New Harvest</h1>
+        <h2 *ngIf="edit == false">Please, enter the following information:</h2>
     </ion-item>
 
     <ion-list>
+        <ion-item *ngIf="edit == false">
+            <ion-label>Hive</ion-label>
+            <ion-select interface="action-sheet" [(ngModel)]="hive">
+                <ion-option *ngFor="let hive of hivesList" [value]="hive.id">{{ hive.name }}</ion-option>
+            </ion-select>
+        </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Harvest name</ion-label>     <!--Harvest_name-->
-            <ion-input placeholder="Enter harvest name"></ion-input>
+            <ion-input placeholder="Enter harvest name" [(ngModel)]="harvestObject.name"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Date</ion-label>             <!--Harvest_date-->
-            <ion-input placeholder="Enter date"></ion-input>
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" [(ngModel)]="harvestObject.date"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Harvest product</ion-label>  <!--Harvest_product-->
-            <ion-select [(ngModel)]="harvest-product" interface="action-sheet" placeholder="Select harvest product">
-                <ion-option value="bee-bread">Bee bread</ion-option>
-                <ion-option value="bee-brood">Bee brood</ion-option>
-                <ion-option value="beewax">Beewax</ion-option>
-                <ion-option value="honey">Honey</ion-option>
-                <ion-option value="pollen">Pollen</ion-option>
-                <ion-option value="bee-bread">Propolis</ion-option>
+            <ion-select [(ngModel)]="harvestObject.product" interface="action-sheet" placeholder="Select harvest product">
+                <ion-option [value]="Beebread">Bee bread</ion-option>
+                <ion-option [value]="Beebrood">Bee brood</ion-option>
+                <ion-option [value]="Beewax">Beewax</ion-option>
+                <ion-option [value]="Honey">Honey</ion-option>
+                <ion-option [value]="Pollen">Pollen</ion-option>
+                <ion-option [value]="Propolis">Propolis</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Quantity</ion-label>         <!--Harvest_quantity-->
-            <ion-input placeholder="Enter quantity"></ion-input>
+            <ion-input type="number" placeholder="Enter quantity" [(ngModel)]="harvestObject.quantity"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Unit</ion-label>             <!--Harvest_unit-->
-            <ion-select [(ngModel)]="harvest-unit" interface="action-sheet" placeholder="Select unit">
-                <ion-option value="g">Grams</ion-option>
-                <ion-option value="g">Kilograms</ion-option>
-                <ion-option value="ml">Milliliters</ion-option>
-                <ion-option value="l">Liters</ion-option>
-                <ion-option value="f">Frames</ion-option>
+            <ion-select [(ngModel)]="harvestObject.unit" interface="action-sheet" placeholder="Select unit">
+                <ion-option [value]="Grams">Grams</ion-option>
+                <ion-option [value]="Kilograms">Kilograms</ion-option>
+                <ion-option [value]="Milliliters">Milliliters</ion-option>
+                <ion-option [value]="Liters">Liters</ion-option>
+                <ion-option [value]="Frames">Frames</ion-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label stacked color="primary">Notes</ion-label>            <!--Harvest_notes-->
-            <ion-input placeholder="Add notes"></ion-input>
+            <ion-textarea rows="4" #noteData></ion-textarea>
         </ion-item>
 
         <ion-row padding>
@@ -58,9 +66,14 @@
                     <button ion-button outline>Cancel</button>
                 </ion-buttons>
             </ion-col>
-            <ion-col width-67>
+            <ion-col width-67 *ngIf="edit == false">
                 <ion-buttons end>
-                    <button ion-button block>Save</button>
+                    <button ion-button block (click)="createHarvest(noteData.value)">Save</button>
+                </ion-buttons>
+            </ion-col>
+            <ion-col width-67 *ngIf="edit == true">
+                <ion-buttons end>
+                    <button ion-button block (click)="editHarvest(noteData.value)">Save</button>
                 </ion-buttons>
             </ion-col>
         </ion-row>
