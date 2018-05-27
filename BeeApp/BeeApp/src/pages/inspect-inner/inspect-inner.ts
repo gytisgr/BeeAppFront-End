@@ -89,7 +89,7 @@ export class InspectInnerPage {
                         this.http.delete('https://beeapi.azurewebsites.net/api/inspection/' + inspectionId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
                             data => {
 
-                                this.popAlert('You have successfully deleted inspection named: ' + this.inspection.name, 'success', 7000, 'bottom');
+                                this.popAlert('You have successfully deleted inspection named: ' + this.inspection.name, 'success', 7000, 'top');
                                 this.inspectionService.setId(0);
                                 this.inspectionService.setInspectionObject(null);
                                 this.navCtrl.pop();

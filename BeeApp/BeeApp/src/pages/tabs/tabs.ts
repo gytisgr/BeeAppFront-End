@@ -49,6 +49,19 @@ export class TabsPage {
         public authService: AuthenticationService,
         private cd: ChangeDetectorRef) {
 
+        //this.getToken();
+        //this.getApiaries();
+
+    }
+
+    tabsChange() {
+
+        if (this.apiaryService.getId())
+        {
+            this.getHives();
+        }
+
+        console.log('tab change');
         this.getToken();
         this.getApiaries();
     }
@@ -82,7 +95,7 @@ export class TabsPage {
             },
             () => {
 
-                //this.cd.detectChanges();
+                this.cd.detectChanges();
                 //this.apiarySelect.open();
                 if (this.apiaries.length == 0) {
                     this.enableTabs = false;
@@ -90,7 +103,10 @@ export class TabsPage {
             });
     }
 
-    getHives(apiaryId) {
+    getHives() {
+
+        let apiaryId = this.apiaryService.getId();
+
         this.http.get('https://beeapi.azurewebsites.net/api/hive/' + apiaryId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
             data => {
                 if (data) {
@@ -121,8 +137,8 @@ export class TabsPage {
     selectedApiary(apiaryId: number) {
         this.menuCtrl.close();
         this.enableTabs = true;
-        this.getHives(apiaryId)
         this.apiaryService.setId(apiaryId);
+        this.getHives();
         this.tabRef.select(0);
         this.tabRef.select(1);
     }

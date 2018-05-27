@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { NavController, LoadingController, ToastController, AlertController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, AlertController, Tabs } from 'ionic-angular';
 import { InspectInnerPage } from '../inspect-inner/inspect-inner';
 import { InspectCreatePage } from '../inspect-create/inspect-create';
 import { HiveService } from "../../app/service/hiveService";
@@ -52,7 +52,8 @@ export class HiveInner {
         public hiveService: HiveService,
         public inspectionService: InspectionService,
         public loadingCtrl: LoadingController,
-        private alertCtrl: AlertController) {
+        private alertCtrl: AlertController,
+        private tabs: Tabs) {
         this.hiveTabs = 'info';
         this.hive = this.hiveService.getHiveObject();
     }
@@ -123,9 +124,11 @@ export class HiveInner {
                         this.http.delete('https://beeapi.azurewebsites.net/api/hive/' + hiveId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
                             data => {
 
-                                this.popAlert('You have successfully deleted hive named: ' + this.hive.name, 'success', 7000, 'bottom');
+                                this.popAlert('You have successfully deleted hive named: ' + this.hive.name, 'success', 7000, 'top');
                                 this.hiveService.setId(0);
                                 this.hiveService.setHiveObject(null);
+                                this.tabs.select(0);
+                                this.tabs.select(1);
                                 this.navCtrl.pop();
 
                             },

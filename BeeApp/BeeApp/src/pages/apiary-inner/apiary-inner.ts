@@ -74,7 +74,7 @@ export class ApiaryInnerPage {
 
                         this.http.delete('https://beeapi.azurewebsites.net/api/apiary/' + apiaryId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
                             data => {
-                                this.popAlert('You have successfully deleted apiary named: ' + this.apiary.name, 'success', 7000, 'bottom');
+                                this.popAlert('You have successfully deleted apiary named: ' + this.apiary.name, 'success', 7000, 'top');
                                 this.apiaryService.setId(0);
                                 this.apiaryService.setApiaryObject(null);
                                 this.navCtrl.pop();
@@ -116,7 +116,7 @@ export class ApiaryInnerPage {
         //    },
         //    () => {
         //        // done
-        //        this.popAlert('You have successfully deleted apiary named: ' + this.apiary.name, 'success', 7000, 'bottom');
+        //        this.popAlert('You have successfully deleted apiary named: ' + this.apiary.name, 'success', 7000, 'top');
         //        this.inspectionService.setId(0);
         //        this.inspectionService.setEditInspectionObject(null);
         //        this.navCtrl.pop();

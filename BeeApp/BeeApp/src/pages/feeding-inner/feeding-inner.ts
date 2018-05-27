@@ -72,7 +72,7 @@ export class FeedingInnerPage {
 
                         this.http.delete('https://beeapi.azurewebsites.net/api/feeding/' + feedingId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
                             data => {
-                                this.popAlert('You have successfully deleted feeding named: ' + this.feeding.name, 'success', 7000, 'bottom');
+                                this.popAlert('You have successfully deleted feeding named: ' + this.feeding.name, 'success', 7000, 'top');
                                 this.feedingsService.setId(0);
                                 this.feedingsService.setFeedingsObject(null);
                                 this.navCtrl.pop();

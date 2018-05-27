@@ -66,7 +66,7 @@ export class HarvestInnerPage {
 
                         this.http.delete('https://beeapi.azurewebsites.net/api/harvest/' + harvestId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
                             data => {
-                                this.popAlert('You have successfully deleted harvest named: ' + this.harvest.name, 'success', 7000, 'bottom');
+                                this.popAlert('You have successfully deleted harvest named: ' + this.harvest.name, 'success', 7000, 'top');
                                 this.harvestService.setId(0);
                                 this.harvestService.setHarvestObject(null);
                                 this.navCtrl.pop();

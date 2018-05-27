@@ -82,12 +82,12 @@ export class InspectCreatePage {
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully created a new inspection named: ' + this.inspectionObject.name, 'success', 7000, 'bottom');
+                this.popAlert('You have successfully created a new inspection named: ' + this.inspectionObject.name, 'success', 7000, 'top');
                 this.navCtrl.pop();
             });
     }
@@ -113,12 +113,12 @@ export class InspectCreatePage {
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully update inspection named: ' + this.inspectionObject.name, 'success', 7000, 'bottom');
+                this.popAlert('You have successfully update inspection named: ' + this.inspectionObject.name, 'success', 7000, 'top');
                 this.navCtrl.pop();
             });
     }

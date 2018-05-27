@@ -34,15 +34,15 @@ var ChangePasswordPage = (function () {
     ChangePasswordPage.prototype.savePassword = function () {
         var _this = this;
         if (this.password.newpassword != this.password.confirmNewPassword) {
-            this.popAlert('Passwords need to match', 'warning', 7000, 'bottom');
+            this.popAlert('Passwords need to match', 'warning', 7000, 'top');
         }
         else {
             this.http.put('https://beeapi.azurewebsites.net/api/beekeeper/change-password', this.password, { headers: this.authService.getHeader(true) }).map(function (res) { return res.json(); }).subscribe(function (data) {
-                _this.popAlert('You have successfully updated your password', 'success', 7000, 'bottom');
+                _this.popAlert('You have successfully updated your password', 'success', 7000, 'top');
             }, function (error) {
                 if (error.status == 400) {
                     var errorMessage = JSON.parse(error._body);
-                    _this.popAlert(errorMessage.message, 'warning', 7000, 'bottom');
+                    _this.popAlert(errorMessage.message, 'warning', 7000, 'top');
                 }
             }, function () {
                 // done

@@ -107,13 +107,13 @@ export class TreatmentCreatePage {
                     if (data) {
                         console.log(data);
                     }
-                    this.popAlert('You have successfully created a new treatment named: ' + this.treatmentObject.name, 'success', 7000, 'bottom');
+                    this.popAlert('You have successfully created a new treatment named: ' + this.treatmentObject.name, 'success', 7000, 'top');
                     this.navCtrl.pop();
                 },
                 error => {
                     if (error.status == 400) {
                         let errorMessage = JSON.parse(error._body);
-                        this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                        this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                     }
                 },
                 () => {
@@ -121,7 +121,7 @@ export class TreatmentCreatePage {
 
                 });
         } else {
-            this.popAlert('Please select hive', 'warning', 7000, 'bottom');
+            this.popAlert('Please select hive', 'warning', 7000, 'top');
         }
     }
 
@@ -145,12 +145,12 @@ export class TreatmentCreatePage {
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully update treatment named: ' + this.treatmentObject.name, 'success', 7000, 'bottom');
+                this.popAlert('You have successfully update treatment named: ' + this.treatmentObject.name, 'success', 7000, 'top');
                 this.navCtrl.pop();
             });
     }

@@ -37,7 +37,7 @@ export class ApiaryCreatePage {
         public inspectionService: InspectionService,
         public loadingCtrl: LoadingController) { }
 
-    ionViewDidLoad() {
+    ionViewDidEnter() {
         this.apiaryObject = {
             name: "",
             place: "",
@@ -65,12 +65,12 @@ export class ApiaryCreatePage {
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully created a new apiary named: ' + this.apiaryObject.name, 'success', 7000, 'bottom');
+                this.popAlert('You have successfully created a new apiary named: ' + this.apiaryObject.name, 'success', 7000, 'top');
                 this.navCtrl.pop();
             });
     }
@@ -89,12 +89,12 @@ export class ApiaryCreatePage {
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully update apiary named: ' + this.apiaryObject.name, 'success', 7000, 'bottom');
+                this.popAlert('You have successfully update apiary named: ' + this.apiaryObject.name, 'success', 7000, 'top');
                 this.navCtrl.pop();
             });
     }

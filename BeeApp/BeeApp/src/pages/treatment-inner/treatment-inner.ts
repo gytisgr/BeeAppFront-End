@@ -72,7 +72,7 @@ export class TreatmentInnerPage {
                         this.http.delete('https://beeapi.azurewebsites.net/api/treatment/' + treatmentId, { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
                             data => {
                                 if (data) {
-                                    this.popAlert('You have successfully deleted treatment named: ' + this.treatment.name, 'success', 7000, 'bottom');
+                                    this.popAlert('You have successfully deleted treatment named: ' + this.treatment.name, 'success', 7000, 'top');
                                     this.treatmentService.setId(0);
                                     this.treatmentService.setTreatmentObject(null);
                                     this.navCtrl.pop();

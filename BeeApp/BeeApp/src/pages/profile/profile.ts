@@ -70,12 +70,12 @@ export class ProfilePage {
 
         this.http.put('https://beeapi.azurewebsites.net/api/beekeeper/update-info', userObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
             data => {
-                this.popAlert('You have successfully updated your profile', 'success', 7000, 'bottom');
+                this.popAlert('You have successfully updated your profile', 'success', 7000, 'top');
             },
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'warning', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'warning', 7000, 'top');
                 }
             },
             () => {

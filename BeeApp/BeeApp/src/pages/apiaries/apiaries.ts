@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Tabs } from 'ionic-angular';
 import { ApiaryCreatePage } from '../apiary-create/apiary-create';
 import { ApiaryInnerPage } from '../apiary-inner/apiary-inner';
 import { Http } from "@angular/http";
@@ -13,8 +13,8 @@ import { AuthenticationService } from "../../app/service/authenticationService";
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-apiaries',
-  templateUrl: 'apiaries.html'
+    selector: 'page-apiaries',
+    templateUrl: 'apiaries.html'
 })
 export class ApiariesPage {
 
@@ -24,10 +24,14 @@ export class ApiariesPage {
         public navCtrl: NavController,
         public http: Http,
         public apiaryService: ApiaryService,
-        public authService: AuthenticationService) {
+        public authService: AuthenticationService,
+        public tabs: Tabs) {
     }
 
     ionViewDidEnter() {
+
+        
+
         this.apiaries = [];
         this.http.get('https://beeapi.azurewebsites.net/api/apiary', { headers: this.authService.getHeader() }).map(res => res.json()).subscribe(
             data => {

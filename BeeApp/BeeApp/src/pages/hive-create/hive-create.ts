@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, LoadingController, ToastController, Tabs, Tab } from 'ionic-angular';
 import { AuthenticationService } from "../../app/service/authenticationService";
 import { Http } from "@angular/http";
 import { ApiaryService } from "../../app/service/apiaryService";
@@ -33,11 +33,14 @@ export class HiveCreate {
         public apiaryService: ApiaryService,
         public hiveService: HiveService,
         public inspectionService: InspectionService,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController,
+        private tabs: Tabs,
+        private tab: Tab) {
 
     }
 
     ionViewDidEnter() {
+
         this.hiveObject = {
             name: "",
             status: null,
@@ -78,17 +81,19 @@ export class HiveCreate {
                 if (data) {
                     console.log(data);
                 }
+                this.popAlert('You have successfully created a new hive named: ' + this.hiveObject.name, 'success', 7000, 'top');
+                this.navCtrl.pop();
+                this.tabs.select(0);
+                this.tabs.select(1);
             },
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully created a new hive named: ' + this.hiveObject.name, 'success', 7000, 'bottom');
-                this.navCtrl.pop();
             });
     }
 
@@ -106,17 +111,17 @@ export class HiveCreate {
                 if (data) {
                     console.log(data);
                 }
+                this.popAlert('You have successfully update hive named: ' + this.hiveObject.name, 'success', 7000, 'top');
+                this.navCtrl.pop();
             },
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully update hive named: ' + this.hiveObject.name, 'success', 7000, 'bottom');
-                this.navCtrl.pop();
             });
     }
 

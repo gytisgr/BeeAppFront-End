@@ -105,13 +105,13 @@ export class HarvestCreatePage {
                     if (data) {
                         console.log(data);
                     }
-                    this.popAlert('You have successfully created a new harvest named: ' + this.harvestObject.name, 'success', 7000, 'bottom');
+                    this.popAlert('You have successfully created a new harvest named: ' + this.harvestObject.name, 'success', 7000, 'top');
                     this.navCtrl.pop();
                 },
                 error => {
                     if (error.status == 400) {
                         let errorMessage = JSON.parse(error._body);
-                        this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                        this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                     }
                 },
                 () => {
@@ -119,7 +119,7 @@ export class HarvestCreatePage {
 
                 });
         } else {
-            this.popAlert('Please select hive', 'warning', 7000, 'bottom');
+            this.popAlert('Please select hive', 'warning', 7000, 'top');
         }
     }
 
@@ -143,12 +143,12 @@ export class HarvestCreatePage {
             error => {
                 if (error.status == 400) {
                     let errorMessage = JSON.parse(error._body);
-                    this.popAlert(errorMessage.message, 'danger', 7000, 'bottom');
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
                 }
             },
             () => {
                 // done
-                this.popAlert('You have successfully update harvest named: ' + this.harvestObject.name, 'success', 7000, 'bottom');
+                this.popAlert('You have successfully update harvest named: ' + this.harvestObject.name, 'success', 7000, 'top');
                 this.navCtrl.pop();
             });
     }

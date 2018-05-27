@@ -34,12 +34,15 @@ export class HivesPage {
         public apiaryService: ApiaryService,
         public authService: AuthenticationService,
         public hiveService: HiveService,
-        public loadingCtrl: LoadingController) {
+        public loadingCtrl: LoadingController,
+        public tabs: Tabs) {
 
         this.getToken();
     }
 
     ionViewDidEnter() {
+
+
         this.hives = [];
         if (this.apiaryService.getId()) {
             this.loadHivesData();

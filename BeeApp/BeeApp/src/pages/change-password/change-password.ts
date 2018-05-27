@@ -34,16 +34,16 @@ export class ChangePasswordPage {
 
     savePassword() {
         if (this.password.newpassword != this.password.confirmNewPassword) {
-            this.popAlert('Passwords need to match', 'warning', 7000, 'bottom');
+            this.popAlert('Passwords need to match', 'warning', 7000, 'top');
         } else {
             this.http.put('https://beeapi.azurewebsites.net/api/beekeeper/change-password', this.password, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
                 data => {
-                    this.popAlert('You have successfully updated your password', 'success', 7000, 'bottom');
+                    this.popAlert('You have successfully updated your password', 'success', 7000, 'top');
                 },
                 error => {
                     if (error.status == 400) {
                         let errorMessage = JSON.parse(error._body);
-                        this.popAlert(errorMessage.message, 'warning', 7000, 'bottom');
+                        this.popAlert(errorMessage.message, 'warning', 7000, 'top');
                     }
                 },
                 () => {

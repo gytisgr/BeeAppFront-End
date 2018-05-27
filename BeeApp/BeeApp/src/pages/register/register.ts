@@ -39,7 +39,7 @@ export class RegisterPage {
         loader.present();
 
         if (this.user.password != this.user.confirmPassword) {
-            this.popAlert('Password need to match', 'warning', 7000, 'bottom');
+            this.popAlert('Password need to match', 'warning', 7000, 'top');
         } else {
 
             this.http.post('https://beeapi.azurewebsites.net/api/beekeeper', this.user).map(res => res.json()).subscribe(
@@ -66,7 +66,7 @@ export class RegisterPage {
 
                         let errorMessage = JSON.parse(error._body);
 
-                        this.popAlert(errorMessage.message, 'warning', 7000, 'bottom');
+                        this.popAlert(errorMessage.message, 'warning', 7000, 'top');
                     }
                 });
         }
