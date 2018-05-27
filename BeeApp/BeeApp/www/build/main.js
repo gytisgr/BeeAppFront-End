@@ -32,6 +32,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var LoginPage = (function () {
     function LoginPage(navCtrl, navParams, loadingCtrl, toastCtrl, http, platform, authService) {
+        //this.username = 'k.jankauskas@hotmail.com';
+        //this.password = 'testing1';
+        //this.processlogin();
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.loadingCtrl = loadingCtrl;
@@ -39,9 +42,6 @@ var LoginPage = (function () {
         this.http = http;
         this.platform = platform;
         this.authService = authService;
-        this.username = 'k.jankauskas@hotmail.com';
-        this.password = 'testing1';
-        this.processlogin();
         if (navParams.get('email')) {
             this.username = navParams.get('email');
         }
@@ -87,15 +87,10 @@ var LoginPage = (function () {
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-login',template:/*ion-inline-start:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\login\login.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n\n\n        <ion-title>Login</ion-title>\n\n\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <p padding>\n\n        Please enter your credentials to continue.\n\n    </p>\n\n\n\n    <ion-list padding>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Email</ion-label>\n\n            <ion-input type="text" [(ngModel)]="username"></ion-input>\n\n        </ion-item>\n\n\n\n        <ion-item>\n\n            <ion-label stacked>Password</ion-label>\n\n            <ion-input type="password" [(ngModel)]="password"></ion-input>\n\n        </ion-item>\n\n\n\n    </ion-list>\n\n\n\n    <div>\n\n        <button ion-button full (click)="processlogin()">Log In</button>\n\n        <button ion-button full (click)="openRegisterPage()">Register</button>\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\kjank\source\repos\BeeAppFront-End\BeeApp\BeeApp\src\pages\login\login.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_6__app_service_authenticationService__["a" /* AuthenticationService */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ToastController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__app_service_authenticationService__["a" /* AuthenticationService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__app_service_authenticationService__["a" /* AuthenticationService */]) === "function" && _g || Object])
     ], LoginPage);
     return LoginPage;
+    var _a, _b, _c, _d, _e, _f, _g;
 }());
 
 //# sourceMappingURL=login.js.map

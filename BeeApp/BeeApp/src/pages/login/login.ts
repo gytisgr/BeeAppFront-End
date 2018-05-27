@@ -30,9 +30,9 @@ export class LoginPage {
         public platform: Platform,
         public authService: AuthenticationService) {
 
-        this.username = 'k.jankauskas@hotmail.com';
-        this.password = 'testing1';
-        this.processlogin();
+        //this.username = 'k.jankauskas@hotmail.com';
+        //this.password = 'testing1';
+        //this.processlogin();
 
         if (navParams.get('email')) {
             this.username = navParams.get('email');
