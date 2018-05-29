@@ -91,38 +91,35 @@ export class TreatmentCreatePage {
     }
 
     createTreatment(noteData) {
-        if (this.hive.name) {
-            let apiaryId = this.apiaryService.getId();
-            let hiveId = this.hive;
 
-            this.treatmentObject.date = new Date(this.treatmentObject.date).toISOString();
-            if (noteData == '') {
-                this.treatmentObject.note = 'null';
-            } else {
-                this.treatmentObject.note = noteData;
-            }
+        let apiaryId = this.apiaryService.getId();
+        let hiveId = this.hive;
 
-            this.http.post('https://beeapi.azurewebsites.net/api/treatment/' + apiaryId + '/' + hiveId, this.treatmentObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
-                data => {
-                    if (data) {
-                        console.log(data);
-                    }
-                    this.popAlert('You have successfully created a new treatment named: ' + this.treatmentObject.name, 'success', 7000, 'top');
-                    this.navCtrl.pop();
-                },
-                error => {
-                    if (error.status == 400) {
-                        let errorMessage = JSON.parse(error._body);
-                        this.popAlert(errorMessage.message, 'danger', 7000, 'top');
-                    }
-                },
-                () => {
-                    // done
-
-                });
+        this.treatmentObject.date = new Date(this.treatmentObject.date).toISOString();
+        if (noteData == '') {
+            this.treatmentObject.note = 'null';
         } else {
-            this.popAlert('Please select hive', 'warning', 7000, 'top');
+            this.treatmentObject.note = noteData;
         }
+
+        this.http.post('https://beeapi.azurewebsites.net/api/treatment/' + apiaryId + '/' + hiveId, this.treatmentObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
+            data => {
+                if (data) {
+                    console.log(data);
+                }
+                this.popAlert('You have successfully created a new treatment named: ' + this.treatmentObject.name, 'success', 7000, 'top');
+                this.navCtrl.pop();
+            },
+            error => {
+                if (error.status == 400) {
+                    let errorMessage = JSON.parse(error._body);
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
+                }
+            },
+            () => {
+                // done
+
+            });
     }
 
     editTreatment(noteData) {

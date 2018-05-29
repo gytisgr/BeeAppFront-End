@@ -87,40 +87,36 @@ export class HarvestCreatePage {
     }
 
     createHarvest(noteData) {
-        if (this.hive.name) {
-            let apiaryId = this.apiaryService.getId();
-            let hiveId = this.hive;
+        let apiaryId = this.apiaryService.getId();
+        let hiveId = this.hive;
 
-            this.harvestObject.date = new Date(this.harvestObject.date).toISOString();
-            if (noteData == '') {
-                this.harvestObject.note = 'null';
-            } else {
-                this.harvestObject.note = noteData;
-            }
-
-            delete this.harvestObject.id;
-
-            this.http.post('https://beeapi.azurewebsites.net/api/harvest/' + apiaryId + '/' + hiveId, this.harvestObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
-                data => {
-                    if (data) {
-                        console.log(data);
-                    }
-                    this.popAlert('You have successfully created a new harvest named: ' + this.harvestObject.name, 'success', 7000, 'top');
-                    this.navCtrl.pop();
-                },
-                error => {
-                    if (error.status == 400) {
-                        let errorMessage = JSON.parse(error._body);
-                        this.popAlert(errorMessage.message, 'danger', 7000, 'top');
-                    }
-                },
-                () => {
-                    // done
-
-                });
+        this.harvestObject.date = new Date(this.harvestObject.date).toISOString();
+        if (noteData == '') {
+            this.harvestObject.note = 'null';
         } else {
-            this.popAlert('Please select hive', 'warning', 7000, 'top');
+            this.harvestObject.note = noteData;
         }
+
+        delete this.harvestObject.id;
+
+        this.http.post('https://beeapi.azurewebsites.net/api/harvest/' + apiaryId + '/' + hiveId, this.harvestObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
+            data => {
+                if (data) {
+                    console.log(data);
+                }
+                this.popAlert('You have successfully created a new harvest named: ' + this.harvestObject.name, 'success', 7000, 'top');
+                this.navCtrl.pop();
+            },
+            error => {
+                if (error.status == 400) {
+                    let errorMessage = JSON.parse(error._body);
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
+                }
+            },
+            () => {
+                // done
+
+            });
     }
 
     editHarvest(noteData) {

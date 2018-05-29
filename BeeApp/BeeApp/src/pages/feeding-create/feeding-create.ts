@@ -13,8 +13,8 @@ import { FeedingsService } from "../../app/service/feedingsService";
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-feeding-create',
-  templateUrl: 'feeding-create.html'
+    selector: 'page-feeding-create',
+    templateUrl: 'feeding-create.html'
 })
 export class FeedingCreatePage {
 
@@ -88,38 +88,34 @@ export class FeedingCreatePage {
     }
 
     createFeeding(noteData) {
-        if (this.hive.name) {
-            let apiaryId = this.apiaryService.getId();
-            let hiveId = this.hive;
+        let apiaryId = this.apiaryService.getId();
+        let hiveId = this.hive;
 
-            this.feedingObject.date = new Date(this.feedingObject.date).toISOString();
-            if (noteData == '') {
-                this.feedingObject.note = 'null';
-            } else {
-                this.feedingObject.note = noteData;
-            }
-
-            this.http.post('https://beeapi.azurewebsites.net/api/feeding/' + apiaryId + '/' + hiveId, this.feedingObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
-                data => {
-                    if (data) {
-                        console.log(data);
-                    }
-                    this.popAlert('You have successfully created a new feeding named: ' + this.feedingObject.name, 'success', 7000, 'top');
-                    this.navCtrl.pop();
-                },
-                error => {
-                    if (error.status == 400) {
-                        let errorMessage = JSON.parse(error._body);
-                        this.popAlert(errorMessage.message, 'danger', 7000, 'top');
-                    }
-                },
-                () => {
-                    // done
-                    
-                });
+        this.feedingObject.date = new Date(this.feedingObject.date).toISOString();
+        if (noteData == '') {
+            this.feedingObject.note = 'null';
         } else {
-            this.popAlert('Please select hive', 'warning', 7000, 'top');
+            this.feedingObject.note = noteData;
         }
+
+        this.http.post('https://beeapi.azurewebsites.net/api/feeding/' + apiaryId + '/' + hiveId, this.feedingObject, { headers: this.authService.getHeader(true) }).map(res => res.json()).subscribe(
+            data => {
+                if (data) {
+                    console.log(data);
+                }
+                this.popAlert('You have successfully created a new feeding named: ' + this.feedingObject.name, 'success', 7000, 'top');
+                this.navCtrl.pop();
+            },
+            error => {
+                if (error.status == 400) {
+                    let errorMessage = JSON.parse(error._body);
+                    this.popAlert(errorMessage.message, 'danger', 7000, 'top');
+                }
+            },
+            () => {
+                // done
+
+            });
     }
 
     editFeeding(noteData) {
