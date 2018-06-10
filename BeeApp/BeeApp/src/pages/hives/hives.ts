@@ -10,7 +10,7 @@ import { ApiaryService } from "../../app/service/apiaryService";
 import { LoginPage } from "../login/login";
 import { AuthenticationService } from "../../app/service/authenticationService";
 import { HiveService } from "../../app/service/hiveService";
-import { Observable } from "ionic-native/node_modules/rxjs/Rx";
+import { Observable } from "../../../node_modules/rxjs";
 import { InspectionService } from "../../app/service/inspectionService";
 
 @Component({

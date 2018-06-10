@@ -7,7 +7,7 @@ import { HiveService } from "../../app/service/hiveService";
 import { Http } from "@angular/http";
 import { ApiaryService } from "../../app/service/apiaryService";
 import { AuthenticationService } from "../../app/service/authenticationService";
-import { Observable } from "ionic-native/node_modules/rxjs/Rx";
+import { Observable } from "../../../node_modules/rxjs";
 import { InspectionService } from "../../app/service/inspectionService";
 import { HiveCreate } from "../hive-create/hive-create";
 import * as moment from 'moment';
@@ -192,14 +192,14 @@ export class HiveInner {
         ).subscribe(
             data => {
                 if (data[0]) {
-                    if (data[0].length > 0) {
+                    if (data[0] > 0) {
                         this.setTemperatureChart(data[0]);
                         this.setHumidityChart(data[0]);
                     }
                 }
 
                 if (data[1]) {
-                    if (data[1].length > 0) {
+                    if (data[1] > 0) {
                         //this.setStrenghtChart(data[1]);
                     }
                 }
